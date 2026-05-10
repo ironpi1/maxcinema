@@ -24,7 +24,7 @@ import lombok.Data;
 public class Region {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer region_id;
+    private Integer id;
 
     @NotBlank(message = "el nombre no puede quedar vacio")
     @Size(min = 4,max = 25, message = "minimo 4 caracteres")

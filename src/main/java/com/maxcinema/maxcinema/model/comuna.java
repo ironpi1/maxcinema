@@ -24,7 +24,7 @@ import lombok.Data;
 public class comuna {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer comuna_id;
+    private Integer id;
 
     @NotBlank(message = "el nombre no puede estar vacio")
     @Size(min = 6,max = 25,message = "minimo 6 caracteres")
