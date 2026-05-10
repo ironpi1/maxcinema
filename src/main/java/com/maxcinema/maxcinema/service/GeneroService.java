@@ -38,6 +38,7 @@ public class GeneroService {
     }
 
     public GeneroDTO buscarPorId(Integer id) {
+        log.debug("Buscando género con ID {}", id);
         Genero genero = generoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("No existe género con ID: " + id));
         return convertirADTO(genero);

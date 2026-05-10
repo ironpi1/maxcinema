@@ -7,6 +7,5 @@ import com.maxcinema.maxcinema.model.Genero;
 
 @Repository
 public interface GeneroRepository extends JpaRepository<Genero, Integer>{
-
     Optional<Genero> findByNombre(String nombre);
 }
