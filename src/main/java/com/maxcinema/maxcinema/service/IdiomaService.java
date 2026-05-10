@@ -48,6 +48,11 @@ public class IdiomaService {
         return convertirADTO(idioma);
     }
 
+    public IdiomaDTO guardar(Idioma idioma) {
+        Idioma guardado = idiomaRepository.save(idioma);
+        return convertirADTO(guardado);
+    }
+
     public IdiomaDTO actualizar(Integer id, Idioma actualizado) {
         log.info("Actualizando idioma con ID {}", id);
         Idioma idioma = idiomaRepository.findById(id)

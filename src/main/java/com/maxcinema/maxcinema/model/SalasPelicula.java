@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,5 +22,13 @@ public class SalasPelicula {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
-    
+    //Relación con Película
+    @ManyToOne
+    @JoinColumn(name = "pelicula_id", nullable = false)
+    private Pelicula pelicula;
+
+    // Relación con Sala
+    //@ManyToOne
+    //@JoinColumn(name = "sala_id", nullable = false)
+    //private Sala sala;
 }

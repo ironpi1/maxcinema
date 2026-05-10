@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.maxcinema.maxcinema.dto.DirectorDTO;
 import com.maxcinema.maxcinema.model.Director;
 import com.maxcinema.maxcinema.repository.DirectorRepository;
-
 import lombok.extern.slf4j.Slf4j;
 
 @Service
@@ -82,4 +81,5 @@ public class DirectorService {
         dto.setNacionalidad(director.getNacionalidad());
         return dto;
     }
+
 }

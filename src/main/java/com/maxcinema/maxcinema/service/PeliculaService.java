@@ -42,20 +42,22 @@ public class PeliculaService {
         return peliculaRepository.findByTitulo(titulo);
     }
 
-    public Pelicula guardarPelicula(Pelicula pelicula) {
-        return peliculaRepository.save(pelicula);
+    public PeliculaDTO guardarPelicula(Pelicula pelicula) {
+        Pelicula guardada = peliculaRepository.save(pelicula);
+        return convertirADTO(guardada);
     }
 
-    public Pelicula actualizarPelicula(Integer id, Pelicula peliculaActualizada) {
+    public PeliculaDTO actualizarPelicula(Integer id, Pelicula peliculaActualizada) {
         Pelicula pelicula = peliculaRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("La película con ID " + id + " no existe."));
+        .orElseThrow(() -> new RuntimeException("La película con ID " + id + " no existe."));
         pelicula.setTitulo(peliculaActualizada.getTitulo());
         pelicula.setDescripcion(peliculaActualizada.getDescripcion());
         pelicula.setDuracion(peliculaActualizada.getDuracion());
         pelicula.setAnioEstreno(peliculaActualizada.getAnioEstreno());
         pelicula.setEstado(peliculaActualizada.getEstado());
-        return peliculaRepository.save(pelicula);
-    }
+        Pelicula guardada = peliculaRepository.save(pelicula);
+         return convertirADTO(guardada);
+}
 
     public String eliminar(Integer id) {
         try {
@@ -97,35 +99,33 @@ public class PeliculaService {
         dto.setAnioEstreno(pelicula.getAnioEstreno());
         dto.setEstado(pelicula.getEstado());
 
-        // Géneros
+    // Géneros
         if (pelicula.getGeneros() != null && !pelicula.getGeneros().isEmpty()) {
-            dto.setNombreGeneros(pelicula.getGeneros().get(0).getNombre());
+            dto.setNombreGeneros(pelicula.getGeneros().get(0).getGenero().getNombre());
         } else {
             dto.setNombreGeneros("Sin género asignado");
         }
 
-        // Directores
+    // Directores
         if (pelicula.getDirectores() != null && !pelicula.getDirectores().isEmpty()) {
-            dto.setNombreDirectores(pelicula.getDirectores().get(0).getNombre());
+            dto.setNombreDirectores(pelicula.getDirectores().get(0).getDirector().getNombre());
         } else {
             dto.setNombreDirectores("Director desconocido");
         }
 
-        // Idiomas
+    // Idiomas
         if (pelicula.getIdiomas() != null && !pelicula.getIdiomas().isEmpty()) {
-            dto.setNombreIdiomas(pelicula.getIdiomas().get(0).getNombre());
+            dto.setNombreIdiomas(pelicula.getIdiomas().get(0).getIdioma().getNombre());
         } else {
             dto.setNombreIdiomas("Idioma no definido");
         }
 
-        // Salas
+    // Salas
         if (pelicula.getSalasPelicula() != null && !pelicula.getSalasPelicula().isEmpty()) {
-            dto.setNombreSalasPelicula(pelicula.getSalasPelicula().get(0).getNombre());
+            dto.setNombreSalasPelicula(pelicula.getSalasPelicula().get(0).getSala().getNombre());
         } else {
             dto.setNombreSalasPelicula("Sala no asignada");
         }
-
         return dto;
     }
 }
-
