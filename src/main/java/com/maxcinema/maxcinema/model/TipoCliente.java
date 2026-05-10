@@ -38,4 +38,6 @@ public class TipoCliente {
 
     @OneToMany(mappedBy = "tipoCliente")
     private List<Cliente> clientes;
+
+    private String alo;
 }
