@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.maxcinema.maxcinema.dto.GeneroDTO;
+import com.maxcinema.maxcinema.DTO.GeneroDTO;
 import com.maxcinema.maxcinema.model.Genero;
 import com.maxcinema.maxcinema.repository.GeneroRepository;
 

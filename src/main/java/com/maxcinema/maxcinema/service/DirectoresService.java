@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.maxcinema.maxcinema.dto.DirectoresDTO;
+import com.maxcinema.maxcinema.DTO.DirectoresDTO;
 import com.maxcinema.maxcinema.model.Directores;
 import com.maxcinema.maxcinema.repository.DirectoresRepository;
 

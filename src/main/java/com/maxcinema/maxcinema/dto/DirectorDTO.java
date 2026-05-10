@@ -1,12 +1,8 @@
-package com.maxcinema.maxcinema.dto;
+package com.maxcinema.maxcinema.DTO;
 
 import java.util.List;
-
 import com.maxcinema.maxcinema.model.Directores;
-
-
 import lombok.Data;
-
 @Data
 public class DirectorDTO {
 

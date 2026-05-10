@@ -3,7 +3,7 @@ package com.maxcinema.maxcinema.service;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.maxcinema.maxcinema.dto.SalasPeliculaDTO;
+import com.maxcinema.maxcinema.DTO.SalasPeliculaDTO;
 import com.maxcinema.maxcinema.model.SalasPelicula;
 import com.maxcinema.maxcinema.repository.SalasPeliculaRepository;
 import lombok.extern.slf4j.Slf4j;

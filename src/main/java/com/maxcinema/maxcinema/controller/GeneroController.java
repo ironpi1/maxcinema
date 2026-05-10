@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.maxcinema.maxcinema.dto.GeneroDTO;
+import com.maxcinema.maxcinema.DTO.GeneroDTO;
 import com.maxcinema.maxcinema.model.Genero;
 import com.maxcinema.maxcinema.service.GeneroService;
 

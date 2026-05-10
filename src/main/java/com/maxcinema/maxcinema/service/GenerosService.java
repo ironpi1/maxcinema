@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.maxcinema.maxcinema.dto.GenerosDTO;
+import com.maxcinema.maxcinema.DTO.GenerosDTO;
 import com.maxcinema.maxcinema.model.Generos;
 import com.maxcinema.maxcinema.repository.GenerosRepository;
 

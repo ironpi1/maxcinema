@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.maxcinema.maxcinema.dto.DirectorDTO;
+import com.maxcinema.maxcinema.DTO.DirectorDTO;
 import com.maxcinema.maxcinema.model.Director;
 import com.maxcinema.maxcinema.repository.DirectorRepository;
 import lombok.extern.slf4j.Slf4j;
