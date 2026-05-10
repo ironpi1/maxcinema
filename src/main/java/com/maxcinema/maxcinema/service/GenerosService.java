@@ -1,5 +1,5 @@
 package com.maxcinema.maxcinema.service;
 
-public class Generos {
+public class GenerosService {
 
 }

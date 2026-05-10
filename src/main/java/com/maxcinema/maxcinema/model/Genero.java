@@ -1,10 +1,13 @@
 package com.maxcinema.maxcinema.model;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -28,4 +31,7 @@ public class Genero {
     @Column(nullable = false, length = 50)
     private String nombre;
 
+    // Relación hacia la tabla puente
+    @OneToMany(mappedBy = "genero")
+    private List<Generos> peliculas;
 }

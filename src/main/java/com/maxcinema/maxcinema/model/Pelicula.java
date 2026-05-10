@@ -28,10 +28,10 @@ public class Pelicula {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotBlank(message = "El nombre no puede estar vacio")
-    @Size(min = 4, max = 50, message = "El nombre de la pelicula debe tener entre 4 y 50 caracteres")
+    @NotBlank(message = "El titulo no puede estar vacio")
+    @Size(min = 4, max = 50, message = "El titulo de la pelicula debe tener entre 4 y 50 caracteres")
     @Column(nullable = false, length = 50)
-    private String nombre;
+    private String titulo;
 
     @NotBlank(message = "La descripcion de la pelicula no puede estar vacia")
     @Size(min = 100, max = 250, message = "La descripcion de la pelicula debe tener entre 100 y 250 caracteres")
@@ -46,7 +46,7 @@ public class Pelicula {
     private Integer anioEstreno;
 
     @Column(nullable = false)
-    private String estado = "EN_CARTELERA";
+    private String estado;
     
     @OneToMany(mappedBy = "pelicula")
     private List<Generos> generos;
@@ -59,4 +59,8 @@ public class Pelicula {
 
     @OneToMany(mappedBy = "pelicula")
     private List<SalasPelicula> salasPelicula;
+
+    // Relación con entrada (microservicio de Rodrigo)
+    //@OneToMany(mappedBy = "pelicula") 
+    //private List<Entrada> entradas;
 }
