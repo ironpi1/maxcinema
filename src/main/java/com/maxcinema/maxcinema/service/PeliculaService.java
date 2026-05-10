@@ -7,7 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.maxcinema.maxcinema.dto.PeliculaDTO;
+import com.maxcinema.maxcinema.DTO.PeliculaDTO;
 import com.maxcinema.maxcinema.model.Pelicula;
 import com.maxcinema.maxcinema.repository.PeliculaRepository;
 
@@ -127,5 +127,14 @@ public class PeliculaService {
             dto.setNombreSalasPelicula("Sala no asignada");
         }
         return dto;
+
+    // Entradas 
+        if (pelicula.getEntradas() != null && !pelicula.getEntradas().isEmpty()) {
+        dto.setEntradaComprada("Entrada ID: " + pelicula.getEntradas().get(0).getId());
+        } else {
+             dto.setEntradaComprada("Sin entrada asociada");
+        }
     }
+
+    
 }

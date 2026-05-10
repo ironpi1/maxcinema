@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.maxcinema.maxcinema.dto.IdiomasDTO;
+import com.maxcinema.maxcinema.DTO.IdiomasDTO;
 import com.maxcinema.maxcinema.model.Idiomas;
 import com.maxcinema.maxcinema.service.IdiomasService;
 

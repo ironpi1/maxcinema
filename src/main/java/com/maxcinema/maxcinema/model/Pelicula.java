@@ -60,7 +60,6 @@ public class Pelicula {
     @OneToMany(mappedBy = "pelicula")
     private List<SalasPelicula> salasPelicula;
 
-    // Relación con entrada (microservicio de Rodrigo)
-    //@OneToMany(mappedBy = "pelicula") 
-    //private List<Entrada> entradas;
+    @OneToMany(mappedBy = "pelicula") 
+    private List<Entrada> entradas;
 }

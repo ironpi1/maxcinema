@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.maxcinema.maxcinema.dto.PeliculaDTO;
+import com.maxcinema.maxcinema.DTO.PeliculaDTO;
 import com.maxcinema.maxcinema.model.Pelicula;
 import com.maxcinema.maxcinema.service.PeliculaService;
 

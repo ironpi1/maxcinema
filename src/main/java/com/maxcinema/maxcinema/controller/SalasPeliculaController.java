@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.maxcinema.maxcinema.dto.SalasPeliculaDTO;
+import com.maxcinema.maxcinema.DTO.SalasPeliculaDTO;
 import com.maxcinema.maxcinema.model.SalasPelicula;
 import com.maxcinema.maxcinema.service.SalasPeliculaService;
 import jakarta.validation.Valid;

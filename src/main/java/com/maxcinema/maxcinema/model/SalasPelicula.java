@@ -27,8 +27,7 @@ public class SalasPelicula {
     @JoinColumn(name = "pelicula_id", nullable = false)
     private Pelicula pelicula;
 
-    // Relación con Sala
-    //@ManyToOne
-    //@JoinColumn(name = "sala_id", nullable = false)
-    //private Sala sala;
+    @ManyToOne
+    @JoinColumn(name = "sala_id", nullable = false)
+    private Sala sala;
 }

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.maxcinema.maxcinema.dto.DirectorDTO;
+import com.maxcinema.maxcinema.DTO.DirectorDTO;
 import com.maxcinema.maxcinema.model.Director;
 import com.maxcinema.maxcinema.service.DirectorService;
 

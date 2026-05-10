@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.maxcinema.maxcinema.dto.IdiomaDTO;
+import com.maxcinema.maxcinema.DTO.IdiomaDTO;
 import com.maxcinema.maxcinema.model.Idioma;
 import com.maxcinema.maxcinema.repository.IdiomaRepository;
 
