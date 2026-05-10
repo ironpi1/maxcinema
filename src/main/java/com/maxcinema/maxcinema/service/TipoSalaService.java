@@ -19,4 +19,17 @@ public class TipoSalaService {
     public TipoSala guardarTipoSala(TipoSala tipoSala){
         return tipoSalaRepository.save(tipoSala);    
     }
+    public String eliminarTipoSala(Integer id){
+        try {
+            TipoSala tipoSala = tipoSalaRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("imposible eliminar con id, el id" + id + "no existe"));
+            tipoSalaRepository.delete(tipoSala);
+            return "el tipo de sala" + tipoSala.getNombre() + "ha sido eliminado exitosamente";       
+        } catch (RuntimeException e) {
+            return e.getMessage();
+        }
+
+
+
+    }
 }
