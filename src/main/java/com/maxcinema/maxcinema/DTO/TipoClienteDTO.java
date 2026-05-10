@@ -1,5 +1,10 @@
 package com.maxcinema.maxcinema.DTO;
 
-public class TipoClienteDTO {
+import lombok.Data;
 
+@Data
+public class TipoClienteDTO {
+    
+    private String nombre;
+    
 }

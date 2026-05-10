@@ -1,5 +1,14 @@
 package com.maxcinema.maxcinema.service;
 
-public class MetodoPagoService {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import com.maxcinema.maxcinema.repository.MetodoPagoRepository;
+
+@Service
+public class MetodoPagoService {
+    @Autowired
+    private MetodoPagoRepository metodoPagoRepository;
+
+    
 }

@@ -26,19 +26,19 @@ public class Asiento {
     private Integer id;
     
     @NotBlank (message = "La fila es obligatoria")
-    @Size(max = 1, message = "La fila no puede tener más de 1 caracter")
-    @Column(nullable = false, length = 1)
-    private String fila;
+    @Size(min = 1, max = 2, message = "La fila no puede tener más de 2 dígitos")
+    @Column(nullable = false, length = 2)
+    private Integer fila;
 
-    @NotBlank (message = "El número es obligatorio")
-    @Size(max = 3, message = "El número no puede tener más de 3 digitos")
-    @Column(nullable = false)
-    private Integer numero;
+    @NotBlank (message = "La columna es obligatoria")
+    @Size(max = 1, message = "La columna no puede tener más de 1 caracter")
+    @Column(nullable = false, length = 1)
+    private String columna;
     
     @NotBlank (message = "El estado es obligatorio")
     @Size(min = 1, max = 20, message = "El estado no puede tener más de 20 caracteres")
     @Column(nullable = false, length = 20)
-    private String estado;
+    private Boolean estado;
 
     @ManyToOne
     @JoinColumn(name = "tipo_asiento_id")
