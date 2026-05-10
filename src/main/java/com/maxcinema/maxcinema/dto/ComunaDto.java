@@ -1,4 +1,4 @@
-package com.maxcinema.maxcinema.dto;
+package com.maxcinema.maxcinema.DTO;
 import lombok.Data;
 
 @Data

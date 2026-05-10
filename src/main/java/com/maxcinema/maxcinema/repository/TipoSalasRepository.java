@@ -13,6 +13,4 @@ public interface TipoSalasRepository extends JpaRepository<TiposSalas, Integer>{
     List<TiposSalas> findByNombre(String nombre);
 
     List<TiposSalas> findByTipoSala(TipoSala tipoSala);
-
-    Optional<TiposSalas> findById(Integer id);
 }

@@ -42,4 +42,9 @@ public class ComunaService {
         
         return comunaRepository.save(comuna2);
     }
+
+    public List<comuna> buscarComunaPorNombre(String nombre){
+        return comunaRepository.findByNombre(nombre);
+
+    }
 }

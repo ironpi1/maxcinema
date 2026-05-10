@@ -38,8 +38,9 @@ public class TiposSalasService {
             tiposSalas2.setNombre(tiposSalas.getNombre());
         }
         return tipoSalasRepository.save(tiposSalas2);
+    }
 
-
-
+    public List<TiposSalas> buscarTiposSalas(String nombre){
+        return tipoSalasRepository.findByNombre(nombre);
     }
 }

@@ -19,7 +19,7 @@ import lombok.Data;
 @AllArgsConstructor
 @ToString
 @Entity
-@Table(name = "Cine")
+@Table(name = "tipos_sala")
 
 public class TiposSalas {
     @Id

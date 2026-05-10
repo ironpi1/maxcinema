@@ -43,4 +43,12 @@ public class CineService {
         }
         return cineRepository.save(cine2);
     }
+
+    public List<cine> buscarCinePorNombre(String nombre){
+        return cineRepository.findByNombre(nombre);
+    }
+
+    public List<cine> buscarcinePorDireccion(String direccion){
+        return cineRepository.findByDireccion(direccion);
+    }
 }

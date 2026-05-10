@@ -45,4 +45,12 @@ public class SalaService {
         }
         return salaRepository.save(sala2);
     }
+
+    public List<sala> buscarSalaPorNombre(String nombre){
+        return salaRepository.findByNombre(nombre);
+    }
+
+    public List<sala> buscarSalaPorNumeroSala(Integer numeroSala){
+        return salaRepository.findByNumeroDeSala(numeroSala);
+    }
 }

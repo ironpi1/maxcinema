@@ -28,8 +28,20 @@ public class TipoSalaService {
         } catch (RuntimeException e) {
             return e.getMessage();
         }
+    }
 
+    public TipoSala actualizarTipoSala(Integer id, TipoSala tipoSala){
+        TipoSala tipoSala2 = tipoSalaRepository.findById(id)
+        .orElseThrow(() -> new RuntimeException("imposible de encontrar el id, el id" + id + "no existe"));
 
+        if(tipoSala.getNombre() != null){
+            tipoSala2.setNombre(tipoSala.getNombre());
+        }
+        return tipoSalaRepository.save(tipoSala2);
 
+    }
+
+    public List<TipoSala> buscarPortipoSalaPorNombre(String nombre){
+        return tipoSalaRepository.findByNombre(nombre);
     }
 }

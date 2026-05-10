@@ -1,6 +1,6 @@
-package com.maxcinema.maxcinema.dto;
-import lombok.Data;
+package com.maxcinema.maxcinema.DTO;
 
+import lombok.Data;
 @Data
 public class CineDto {
     private Integer id;
