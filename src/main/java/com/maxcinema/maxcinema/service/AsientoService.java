@@ -21,6 +21,12 @@ public class AsientoService {
                 .toList();
     }
 
+    public AsientoDTO buscarPorId(Integer id) {
+        Asiento asiento = asientoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Asiento no encontrado"));
+        return convertirADTO(asiento);
+    }
+
     public String verificarDisponibilidad(Boolean estado) {
         if (estado) {
             return "El asiento está disponible";
@@ -43,12 +49,37 @@ public class AsientoService {
         return asientoRepository.save(asient);
     }
 
+    public Asiento guardarAsiento(Asiento asiento) {
+        return asientoRepository.save(asiento);
+    }
 
-    public AsientoDTO convertirADTO(Asiento asiento) {
+    public AsientoDTO actualizarAsiento(Integer id, AsientoDTO dto) {
+        Asiento asiento = asientoRepository.findById(id).orElseThrow(() -> new RuntimeException("Asiento no encontrado"));
+        if (dto.getFila() != null) asiento.setFila(dto.getFila());
+        if (dto.getColumna() != null) asiento.setColumna(dto.getColumna());
+        if (dto.getEstado() != null) asiento.setEstado(dto.getEstado());
+        Asiento saved = asientoRepository.save(asiento);
+        return convertirADTO(saved);
+    }
+
+    public String eliminarAsiento(Integer id) {
+        try {
+            Asiento asiento = asientoRepository.findById(id)
+                    .orElseThrow(() -> new RuntimeException("¡Imposible eliminar! El asiento con ID " + id + " no existe."));
+            asientoRepository.delete(asiento);
+            return "El asiento '" + asiento.getFila() + "-" + asiento.getColumna() + "' ha sido eliminado exitosamente.";
+        } catch (RuntimeException e) {
+            return e.getMessage();
+        }
+    }
+
+        public AsientoDTO convertirADTO(Asiento asiento) {
         AsientoDTO dto = new AsientoDTO();
+        dto.setId(asiento.getId());
         dto.setFila(asiento.getFila());
         dto.setColumna(asiento.getColumna());
         dto.setEstado(asiento.getEstado());
+        dto.setTipoAsiento(asiento.getTipoAsiento() != null ? asiento.getTipoAsiento().getId() : null);
         return dto;
     }
     
