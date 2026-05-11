@@ -5,4 +5,6 @@ import lombok.Data;
 public class TipoSalaDto {
     private Integer id;
     private String nombre;
+    private String nombreTiposSalas;
+
 }

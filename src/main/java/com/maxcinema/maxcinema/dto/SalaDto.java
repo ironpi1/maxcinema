@@ -6,4 +6,6 @@ public class SalaDto {
     private Integer id;
     private String nombre;
     private Integer NumeroDeSala = 1;
+    private String nombreTipoSala;
+
 }
