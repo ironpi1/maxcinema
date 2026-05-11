@@ -15,7 +15,9 @@ El código fuente se organiza bajo src/main/java/com/maxcinema/maxcinema/ con lo
 - Java 21
 - Maven
 - Laragon con MySQL activo
-- VS Code o IntelliJ IDEA
+- VS Code
+- Spring Boot
+- Spring Jpa + Hibernate
 
 ## Pasos para ejecutar
 
