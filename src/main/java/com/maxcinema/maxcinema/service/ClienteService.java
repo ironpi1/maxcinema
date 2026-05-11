@@ -20,6 +20,45 @@ public class ClienteService {
                 .map(this::convertirADTO)
                 .toList();
     }
+
+    public ClienteDTO buscarPorId(Integer id) {
+        Cliente cliente = clienteRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
+        return convertirADTO(cliente);
+    }
+
+    public Cliente agregarCliente(Cliente cliente) {
+        return clienteRepository.save(cliente);
+    }
+
+    public Cliente editarCliente(Integer id, Cliente cliente) {
+        Cliente client = clienteRepository.findById(id).orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
+        if (cliente.getNombre() != null) {
+            client.setNombre(cliente.getNombre());
+        }
+        if (cliente.getRut() != null) {
+            client.setRut(cliente.getRut());
+        }
+        if (cliente.getEmail() != null) {
+            client.setEmail(cliente.getEmail());
+        }
+        if (cliente.getTelefono() != null) {
+            client.setTelefono(cliente.getTelefono());
+        }
+        return clienteRepository.save(client);
+    }
+
+    public String eliminarCliente(Integer id) {
+        try {
+            Cliente client = clienteRepository.findById(id)
+                    .orElseThrow(() -> new RuntimeException("Cliente no existe"));
+            clienteRepository.delete(client);
+            return "Cliente eliminado correctamente";
+        }catch (Exception e) {
+            return e.getMessage();
+        }
+        
+    }
     
     public ClienteDTO convertirADTO(Cliente cliente) {
         ClienteDTO dto = new ClienteDTO();

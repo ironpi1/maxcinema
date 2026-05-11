@@ -5,6 +5,8 @@ import lombok.Data;
 @Data
 public class TipoAsientoDTO {
 
-    private String nombre;
+    private Integer id;
+    private String tipo;
+    
 
 }

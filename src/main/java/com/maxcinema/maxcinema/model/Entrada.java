@@ -30,13 +30,17 @@ public class Entrada {
     @Column(nullable = false, length = 10)
     private String tipoEntrada;
 
-    @NotNull(message = "el cliente debe tener un rut")
+    @NotNull(message = "El precio es obligatorio")
     @Column(nullable = false, length = 9)
     private Float precio;
 
-    @NotNull(message = "el cliente debe tener un email")
-    @Column(nullable = false, length = 100)
+    @NotNull(message = "La cantidad es obligatoria")
+    @Column(nullable = false, length = 1)
     private Integer cantidad;
+
+    @NotBlank(message = "El horario es obligatorio")
+    @Column(nullable = false, length = 20)
+    private String horario;
 
     @ManyToOne
     @JoinColumn(name = "metodo_pago_id")
@@ -46,9 +50,9 @@ public class Entrada {
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
-    //@ManyToOne
-    //@JoinColumn(name = "pelicula_id")
-    //private Pelicula pelicula;
+    @ManyToOne
+    @JoinColumn(name = "pelicula_id")
+    private Pelicula pelicula;
 
     
 }

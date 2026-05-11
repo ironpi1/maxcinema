@@ -35,6 +35,15 @@ public class AsientoService {
                 .toList();
     }
 
+    public Asiento editarAsiento(Integer id, Asiento asiento) {
+        Asiento asient = asientoRepository.findById(id).orElseThrow(() -> new RuntimeException("Asiento no encontrado"));
+        if (asiento.getEstado() != null) {
+            asient.setEstado(asiento.getEstado());
+        }
+        return asientoRepository.save(asient);
+    }
+
+
     public AsientoDTO convertirADTO(Asiento asiento) {
         AsientoDTO dto = new AsientoDTO();
         dto.setFila(asiento.getFila());
