@@ -5,9 +5,13 @@ import lombok.Data;
 @Data
 public class EntradaDTO {
     
-    private String pelicula;
+    private Integer id;
+    private String tipoEntrada;
+    private Float precio;
+    private Integer cantidad;
     private String horario;
-    private String sala;
-    private String clienteRut;
+    private String metodoPago;
+    private String cliente;
+    private String pelicula;
 
 }

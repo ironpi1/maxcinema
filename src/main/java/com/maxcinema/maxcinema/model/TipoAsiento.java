@@ -27,7 +27,7 @@ public class TipoAsiento {
 
     @NotBlank(message = "El nombre del tipo de asiento es obligatorio")
     @Column(nullable = false, length = 50)
-    private String nombre;
+    private String tipo;
 
     @OneToMany(mappedBy = "tipoAsiento")
     private List<Asiento> asientos;

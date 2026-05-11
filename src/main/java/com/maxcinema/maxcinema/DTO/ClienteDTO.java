@@ -4,9 +4,11 @@ import lombok.Data;
 
 @Data
 public class ClienteDTO {
-    
-    private String rut;
+    private Integer id;
     private String nombre;
+    private String rut;
+    private String email;
+    private String telefono;
     private String tipoCliente;
 
 }

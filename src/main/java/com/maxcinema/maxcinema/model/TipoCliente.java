@@ -30,7 +30,7 @@ public class TipoCliente {
     @NotBlank(message = "El tipo de cliente es obligatorio")
     @Size(max = 50, message = "El nombre del tipo de cliente no puede tener más de 50 caracteres")
     @Column(nullable = false, length = 50)
-    private String nombre;
+    private String tipo;
 
     @Size(max = 10, message = "El descuento no puede tener más de 10 caracteres")
     @Column(nullable = true, length = 10)
