@@ -33,7 +33,7 @@ public class TiposSalas {
 
     @ManyToOne
     @JoinColumn(name = "sala_id")
-    private sala sala;
+    private Sala sala;
 
     @ManyToOne
     @JoinColumn(name = "TipoSala_id")

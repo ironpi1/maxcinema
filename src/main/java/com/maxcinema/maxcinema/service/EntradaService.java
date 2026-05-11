@@ -61,7 +61,7 @@ public class EntradaService {
             Entrada entrada = entradaRepository.findById(id)
                     .orElseThrow(() -> new RuntimeException("Entrada no existe"));
             entradaRepository.delete(entrada);
-            return "Entrada cancelada correctamente";
+            return "Entrada cancelada exitosamente";
         } catch (Exception e) {
             return "No se pudo cancelar la entrada: " + e.getMessage();
         }
