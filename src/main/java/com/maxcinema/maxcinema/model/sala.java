@@ -14,14 +14,12 @@ import jakarta.validation.constraints.Size;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.ToString;
 import lombok.Data;
 
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Entity
 @Table(name = "Sala")
 

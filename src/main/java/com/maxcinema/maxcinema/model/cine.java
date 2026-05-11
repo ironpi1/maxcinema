@@ -11,13 +11,11 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
-import lombok.ToString;
 import lombok.Data;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Entity
 @Table(name = "Cine")
 
