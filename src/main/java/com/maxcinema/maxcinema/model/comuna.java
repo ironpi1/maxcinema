@@ -3,21 +3,21 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
-import lombok.ToString;
 import lombok.Data;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Entity
 @Table(name = "Comuna")
 
@@ -31,7 +31,6 @@ public class comuna {
     @Column(nullable = false, length = 25)
     private String nombre;
 
-    @ManyToOne
-    @JoinColumn(name = "region_id")
-    private Region region;
+    @OneToMany(mappedBy = "region")
+    private List<comuna> comunas;
 }
