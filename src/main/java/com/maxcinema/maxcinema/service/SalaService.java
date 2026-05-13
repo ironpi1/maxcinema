@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.maxcinema.maxcinema.DTO.SalaDto;
-import com.maxcinema.maxcinema.model.sala;
+import com.maxcinema.maxcinema.model.Sala;
 import com.maxcinema.maxcinema.repository.SalaRepository;
 import jakarta.transaction.Transactional;
 
@@ -14,7 +14,7 @@ public class SalaService {
     @Autowired
     private SalaRepository salaRepository;
 
-    private SalaDto convertirADTO(sala sala) {
+    private SalaDto convertirADTO(Sala sala) {
     SalaDto dto = new SalaDto();
     dto.setId(sala.getId());
     dto.setNombre(sala.getNombre());
@@ -33,13 +33,13 @@ public class SalaService {
             .toList();
     }
 
-    public SalaDto guardarSala(sala sala) {
-        sala guardado = salaRepository.save(sala);
+    public SalaDto guardarSala(Sala sala) {
+        Sala guardado = salaRepository.save(sala);
         return convertirADTO(guardado);
     }
 
-    public SalaDto actualizarSala(Integer id, sala Sala) {
-        sala sala2 = salaRepository.findById(id)
+    public SalaDto actualizarSala(Integer id, Sala Sala) {
+        Sala sala2 = salaRepository.findById(id)
         .orElseThrow(() -> new RuntimeException("imposible de encontrar con id, el id " + id + " no existe"));
         if (Sala.getNombre() != null) {
         sala2.setNombre(Sala.getNombre());
@@ -63,7 +63,7 @@ public class SalaService {
     }
     public String eliminarSala(Integer id) {
     try {
-        sala sala = salaRepository.findById(id)
+        Sala sala = salaRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("imposible eliminar con id, el id " + id + " no existe"));
         salaRepository.delete(sala);
         return "la sala '" + sala.getNombre() + "' fue eliminada exitosamente";
@@ -72,7 +72,7 @@ public class SalaService {
     }
     }
     public SalaDto buscarSalaPorId(Integer id) {
-        sala sala = salaRepository.findById(id)
+        Sala sala = salaRepository.findById(id)
         .orElseThrow(() -> new RuntimeException("imposible encontrar la sala con id " + id));
         return convertirADTO(sala);
     }

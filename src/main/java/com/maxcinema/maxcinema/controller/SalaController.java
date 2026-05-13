@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import com.maxcinema.maxcinema.DTO.SalaDto;
-import com.maxcinema.maxcinema.model.sala;
+import com.maxcinema.maxcinema.model.Sala;
 import com.maxcinema.maxcinema.service.SalaService;
 
 @RestController
@@ -25,7 +25,7 @@ public class SalaController {
     }
 
     @PostMapping
-    public ResponseEntity<SalaDto> guardarSala(@RequestBody sala sala) {
+    public ResponseEntity<SalaDto> guardarSala(@RequestBody Sala sala) {
         try {
             SalaDto guardado = salaService.guardarSala(sala);
             return new ResponseEntity<>(guardado, HttpStatus.CREATED);
@@ -35,7 +35,7 @@ public class SalaController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<SalaDto> editarSala(@PathVariable Integer id, @RequestBody sala sala) {
+    public ResponseEntity<SalaDto> editarSala(@PathVariable Integer id, @RequestBody Sala sala) {
         try {
             SalaDto editado = salaService.actualizarSala(id, sala);
             return new ResponseEntity<>(editado, HttpStatus.OK);
@@ -45,7 +45,7 @@ public class SalaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<SalaDto> actualizarSala(@PathVariable Integer id, @RequestBody sala sala) {
+    public ResponseEntity<SalaDto> actualizarSala(@PathVariable Integer id, @RequestBody Sala sala) {
         try {
             SalaDto newSala = salaService.actualizarSala(id, sala);
             return new ResponseEntity<>(newSala, HttpStatus.OK);
