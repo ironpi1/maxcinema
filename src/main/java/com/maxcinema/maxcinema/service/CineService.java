@@ -51,4 +51,5 @@ public class CineService {
     public List<Cine> buscarcinePorDireccion(String direccion){
         return cineRepository.findByDireccion(direccion);
     }
+    
 }
