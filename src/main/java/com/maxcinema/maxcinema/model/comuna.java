@@ -8,7 +8,10 @@ import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import java.util.List;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.NoArgsConstructor;
@@ -21,7 +24,7 @@ import lombok.Data;
 @Entity
 @Table(name = "Comuna")
 
-public class comuna {
+public class Comuna {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -31,6 +34,10 @@ public class comuna {
     @Column(nullable = false, length = 25)
     private String nombre;
 
-    @OneToMany(mappedBy = "region")
-    private List<comuna> comunas;
+    @ManyToOne
+    @JoinColumn(name = "region_id")
+    private Region region;
+
+    @OneToMany(mappedBy = "comuna")
+    private List<Cine> cines;
 }

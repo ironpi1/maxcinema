@@ -5,8 +5,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import java.util.List;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.NoArgsConstructor;
@@ -29,7 +29,6 @@ public class Region {
     @Column(nullable = false, length = 25)
     private String nombre;
 
-    @OneToMany
-    @JoinColumn(name = "comuna_id")
-    private comuna comuna;
+    @OneToMany(mappedBy = "region")
+    private List<Comuna> comunas;
 }

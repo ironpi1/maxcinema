@@ -19,7 +19,7 @@ import lombok.Data;
 @Entity
 @Table(name = "Cine")
 
-public class cine {
+public class Cine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -36,5 +36,5 @@ public class cine {
 
     @ManyToOne
     @JoinColumn(name = "comuna_id")
-    private comuna comuna;
+    private Comuna comuna;
 }

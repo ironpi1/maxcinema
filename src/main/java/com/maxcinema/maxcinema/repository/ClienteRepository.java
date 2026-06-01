@@ -14,7 +14,7 @@ public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
 
     List<Cliente> findByRut(String rut);
 
-    @Query("SELECT c FROM Cliente c WHERE c.tipoCliente.nombre = :nombreTipoCliente")
+    @Query("SELECT c FROM Cliente c WHERE c.tipoCliente.tipo = :nombreTipoCliente")
     List<Cliente> findByTipoCliente(@Param("nombreTipoCliente") String nombreTipoCliente);
 
 }

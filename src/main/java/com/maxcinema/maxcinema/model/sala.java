@@ -5,8 +5,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
+
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinColumn;
+import java.util.List;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -39,7 +42,13 @@ public class Sala {
     @Column(nullable = false)
     private Integer numeroDeSala = 1;
 
-    @OneToMany
-    @JoinColumn(name = "TiposSalas_id")
-    private TiposSalas tiposSalas;
+    @ManyToOne
+    @JoinColumn(name = "cine_id")
+    private Cine cine;
+
+    @OneToMany(mappedBy = "sala")
+    private List<TiposSalas> tiposSalas;
+
+    @OneToMany(mappedBy = "sala")
+    private List<SalasPelicula> salasPelicula;
 }
