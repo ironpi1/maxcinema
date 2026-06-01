@@ -2,7 +2,7 @@ package com.maxcinema.maxcinema.service;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.maxcinema.maxcinema.model.comuna;
+import com.maxcinema.maxcinema.model.Comuna;
 import com.maxcinema.maxcinema.repository.ComunaRepository;
 import jakarta.transaction.Transactional;
 
@@ -12,18 +12,18 @@ public class ComunaService {
     @Autowired
     private ComunaRepository comunaRepository;
 
-    public List<comuna> ListarComuna(){
+    public List<Comuna> ListarComuna(){
         return comunaRepository.findAll();
     }
 
-    public comuna guardarComuna(comuna comuna){
+    public Comuna guardarComuna(Comuna comuna){
         return comunaRepository.save(comuna);
     }
 
     public String eliminarComuna(Integer id){
         try {
 
-            comuna comuna = comunaRepository.findById(id)
+            Comuna comuna = comunaRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("imposible eliminar con id" + id + "no existe"));
             comunaRepository.delete(comuna);
             return "la comuna " + comuna.getNombre() + "fue eliminado exitosamente";
@@ -33,17 +33,17 @@ public class ComunaService {
         }
     }
 
-    public comuna actualizarcComuna(Integer id, comuna Comuna){
-        comuna comuna2 = comunaRepository.findById(id)
+    public Comuna actualizarComuna(Integer id, Comuna comuna){
+        Comuna comuna2 = comunaRepository.findById(id)
         .orElseThrow(() -> new RuntimeException("imposible de encontrar con id, el id " + id + "no existe"));
-        if(Comuna.getNombre() != null){
-            comuna2.setNombre(Comuna.getNombre());
+        if(comuna.getNombre() != null){
+            comuna2.setNombre(comuna.getNombre());
         }
         
         return comunaRepository.save(comuna2);
     }
 
-    public List<comuna> buscarComunaPorNombre(String nombre){
+    public List<Comuna> buscarComunaPorNombre(String nombre){
         return comunaRepository.findByNombre(nombre);
 
     }

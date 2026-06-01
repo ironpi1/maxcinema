@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface TipoAsientoRepository extends JpaRepository<TipoAsiento, Integer> {
     
-    List<TipoAsiento> findByNombreTipo(String nombre);    
+    List<TipoAsiento> findByTipo(String tipo);    
 
 }

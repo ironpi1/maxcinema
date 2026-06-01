@@ -5,8 +5,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import java.util.List;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.NoArgsConstructor;
@@ -19,7 +19,7 @@ import lombok.Data;
 @AllArgsConstructor
 @ToString
 @Entity
-@Table(name = "Cine")
+@Table(name = "tipo_sala")
 
 public class TipoSala {
     @Id
@@ -31,7 +31,6 @@ public class TipoSala {
     @Column(nullable = false, length = 17)
     private String nombre;
 
-    @OneToMany
-    @JoinColumn(name = "TiposSalas_id")
-    private TiposSalas tiposSalas;
+    @OneToMany(mappedBy = "tipoSala")
+    private List<TiposSalas> tiposSalas;
 }
