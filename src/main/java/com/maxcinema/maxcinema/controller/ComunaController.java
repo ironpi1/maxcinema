@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import com.maxcinema.maxcinema.DTO.ComunaDto;
-import com.maxcinema.maxcinema.model.comuna;
+import com.maxcinema.maxcinema.model.Comuna;
 import com.maxcinema.maxcinema.service.ComunaService;
 
 @RestController
@@ -15,9 +15,9 @@ public class ComunaController {
     @Autowired
     private ComunaService comunaService;
 
-   @GetMapping
+    @GetMapping
     public ResponseEntity<List<ComunaDto>> listarComunas() {
-        List<ComunaDto> comunas = comunaService.ListarComuna();
+        List<ComunaDto> comunas = comunaService.listarComuna();
         if (comunas.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
@@ -35,7 +35,7 @@ public class ComunaController {
     }
 
     @PostMapping
-    public ResponseEntity<ComunaDto> guardarComuna(@RequestBody comuna comuna) {
+    public ResponseEntity<ComunaDto> guardarComuna(@RequestBody Comuna comuna) {
         try {
             ComunaDto guardado = comunaService.guardarComuna(comuna);
             return new ResponseEntity<>(guardado, HttpStatus.CREATED);
@@ -45,9 +45,9 @@ public class ComunaController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<ComunaDto> editarComuna(@PathVariable Integer id, @RequestBody comuna comuna) {
+    public ResponseEntity<ComunaDto> editarComuna(@PathVariable Integer id, @RequestBody Comuna comuna) {
         try {
-            ComunaDto editado = comunaService.actualizarcComuna(id, comuna);
+            ComunaDto editado = comunaService.actualizarComuna(id, comuna);
             return new ResponseEntity<>(editado, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -55,9 +55,9 @@ public class ComunaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ComunaDto> actualizarComuna(@PathVariable Integer id, @RequestBody comuna comuna) {
+    public ResponseEntity<ComunaDto> actualizarComuna(@PathVariable Integer id, @RequestBody Comuna comuna) {
         try {
-            ComunaDto newComuna = comunaService.actualizarcComuna(id, comuna);
+            ComunaDto newComuna = comunaService.actualizarComuna(id, comuna);
             return new ResponseEntity<>(newComuna, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

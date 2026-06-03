@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import com.maxcinema.maxcinema.DTO.CineDto;
-import com.maxcinema.maxcinema.model.cine;
+import com.maxcinema.maxcinema.model.Cine;
 import com.maxcinema.maxcinema.service.CineService;
 
 @RestController
@@ -17,7 +17,7 @@ public class CineController {
 
     @GetMapping
     public ResponseEntity<List<CineDto>> listarCines() {
-        List<CineDto> cines = cineService.ListarCine();
+        List<CineDto> cines = cineService.listarCine();
         if (cines.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
@@ -35,7 +35,7 @@ public class CineController {
     }
 
     @PostMapping
-    public ResponseEntity<CineDto> agregarCine(@RequestBody cine cine) {
+    public ResponseEntity<CineDto> agregarCine(@RequestBody Cine cine) {
         try {
             CineDto guardado = cineService.guardarCine(cine);
             return new ResponseEntity<>(guardado, HttpStatus.CREATED);
@@ -45,7 +45,7 @@ public class CineController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<CineDto> editarCine(@PathVariable Integer id, @RequestBody cine cine) {
+    public ResponseEntity<CineDto> editarCine(@PathVariable Integer id, @RequestBody Cine cine) {
         try {
             CineDto editado = cineService.actualizarCine(id, cine);
             return new ResponseEntity<>(editado, HttpStatus.OK);
@@ -55,7 +55,7 @@ public class CineController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CineDto> actualizarCine(@PathVariable Integer id, @RequestBody cine cine) {
+    public ResponseEntity<CineDto> actualizarCine(@PathVariable Integer id, @RequestBody Cine cine) {
         try {
             CineDto newCine = cineService.actualizarCine(id, cine);
             return new ResponseEntity<>(newCine, HttpStatus.OK);

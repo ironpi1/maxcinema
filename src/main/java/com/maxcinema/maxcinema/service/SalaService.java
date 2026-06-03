@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.maxcinema.maxcinema.DTO.SalaDto;
 import com.maxcinema.maxcinema.model.Sala;
+import com.maxcinema.maxcinema.model.TiposSalas;
 import com.maxcinema.maxcinema.repository.SalaRepository;
 import jakarta.transaction.Transactional;
 
@@ -20,14 +21,17 @@ public class SalaService {
     dto.setNombre(sala.getNombre());
     dto.setNumeroDeSala(sala.getNumeroDeSala());
 
-    if (sala.getTiposSalas() != null) {
-        dto.setNombreTipoSala(sala.getTiposSalas().getNombre());
+    if (sala.getTiposSalas() != null && !sala.getTiposSalas().isEmpty()) {
+        TiposSalas relacion = sala.getTiposSalas().get(0);
+        if (relacion.getTipoSala() != null) {
+            dto.setNombreTipoSala(relacion.getTipoSala().getNombre());
+        }
     }
 
     return dto;
     }
 
-    public List<SalaDto> Listarsala() {
+    public List<SalaDto> listarSala() {
     return salaRepository.findAll().stream()
             .map(this::convertirADTO)
             .toList();
@@ -37,15 +41,14 @@ public class SalaService {
         Sala guardado = salaRepository.save(sala);
         return convertirADTO(guardado);
     }
-
-    public SalaDto actualizarSala(Integer id, Sala Sala) {
+    public SalaDto actualizarSala(Integer id, Sala sala) {
         Sala sala2 = salaRepository.findById(id)
         .orElseThrow(() -> new RuntimeException("imposible de encontrar con id, el id " + id + " no existe"));
-        if (Sala.getNombre() != null) {
-        sala2.setNombre(Sala.getNombre());
+        if (sala.getNombre() != null) {
+        sala2.setNombre(sala.getNombre());
         }
-        if (Sala.getNumeroDeSala() != null) {
-            sala2.setNumeroDeSala(Sala.getNumeroDeSala());
+        if (sala.getNumeroDeSala() != null) {
+            sala2.setNumeroDeSala(sala.getNumeroDeSala());
         }
         return convertirADTO(salaRepository.save(sala2));
     }

@@ -17,7 +17,7 @@ public class TipoSalaController {
 
     @GetMapping
     public ResponseEntity<List<TipoSalaDto>> listarTipoSalas() {
-        List<TipoSalaDto> tipoSalas = tipoSalaService.ListarTipoSala();
+        List<TipoSalaDto> tipoSalas = tipoSalaService.listarTipoSala();
         if (tipoSalas.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
