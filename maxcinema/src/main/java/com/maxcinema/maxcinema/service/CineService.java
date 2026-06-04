@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.maxcinema.maxcinema.model.Cine;
 import com.maxcinema.maxcinema.repository.CineRepository;
+import com.maxcinema.maxcinema.DTO.CineDto;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -12,12 +13,26 @@ public class CineService {
     @Autowired
     private CineRepository cineRepository;
 
-    public List<Cine> ListarCine(){
-        return cineRepository.findAll();
+    private CineDto convertirADTO(Cine cine){
+        CineDto dto = new CineDto();
+        dto.setId(cine.getId());
+        dto.setNombre(cine.getNombre());
+        dto.setDireccion(cine.getDireccion());
+        if (cine.getComuna() != null) {
+            dto.setNombreComuna(cine.getComuna().getNombre());
+        }
+        return dto;
     }
 
-    public Cine guardarCine(Cine cine){
-        return cineRepository.save(cine);
+    public List<CineDto> listarCine(){
+        return cineRepository.findAll().stream()
+            .map(this::convertirADTO)
+            .toList();
+    }
+
+    public CineDto guardarCine(Cine cine){
+        Cine guardado = cineRepository.save(cine);
+        return convertirADTO(guardado);
     }
 
     public String eliminarCine(Integer id){
@@ -31,7 +46,7 @@ public class CineService {
             return e.getMessage();
         }
     }
-    public Cine actualizarCine(Integer id, Cine cine){
+    public CineDto actualizarCine(Integer id, Cine cine){
         Cine cine2 = cineRepository.findById(id)
         .orElseThrow(() -> new RuntimeException("imposible de encontrar con id, el id" + id + "no existe"));
 
@@ -41,15 +56,25 @@ public class CineService {
         if(cine.getDireccion() != null){
             cine2.setDireccion(cine.getDireccion());
         }
-        return cineRepository.save(cine2);
+        return convertirADTO(cineRepository.save(cine2));
     }
 
-    public List<Cine> buscarCinePorNombre(String nombre){
-        return cineRepository.findByNombre(nombre);
+    public List<CineDto> buscarCinePorNombre(String nombre){
+        return cineRepository.findByNombre(nombre).stream()
+            .map(this::convertirADTO)
+            .toList();
     }
 
-    public List<Cine> buscarcinePorDireccion(String direccion){
-        return cineRepository.findByDireccion(direccion);
+    public List<CineDto> buscarcinePorDireccion(String direccion){
+        return cineRepository.findByDireccion(direccion).stream()
+            .map(this::convertirADTO)
+            .toList();
+    }
+    
+    public CineDto buscarCinePorId(Integer id){
+        Cine cine = cineRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("imposible encontrar el cine con id " + id));
+        return convertirADTO(cine);
     }
     
 }

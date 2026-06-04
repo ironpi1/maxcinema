@@ -19,14 +19,14 @@ public class TipoSalaService {
         dto.setId(tipoSala.getId());
         dto.setNombre(tipoSala.getNombre());
 
-        if (tipoSala.getTiposSalas() != null) {
-            dto.setNombreTiposSalas(tipoSala.getTiposSalas().getNombre());
+        if (tipoSala.getTiposSalas() != null && !tipoSala.getTiposSalas().isEmpty()) {
+            dto.setNombreTiposSalas(tipoSala.getTiposSalas().get(0).getNombre());
         }
 
         return dto;
     }
 
-    public List<TipoSalaDto> ListarTipoSala() {
+    public List<TipoSalaDto> listarTipoSala() {
         return tipoSalaRepository.findAll().stream()
                 .map(this::convertirADTO)
                 .toList();
