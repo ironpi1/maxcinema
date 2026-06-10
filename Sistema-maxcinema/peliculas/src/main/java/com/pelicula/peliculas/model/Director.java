@@ -1,8 +1,6 @@
 package com.pelicula.peliculas.model;
 
 import java.util.List;
-
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,7 +26,6 @@ public class Director {
 
     @NotBlank(message = "El nombre no puede estar vacio")
     @Size(min = 20, max = 50, message = "El nombre del director debe tener entre 20 y 50 caracteres")
-    @Column(nullable = false, length = 50)
     private String nombre;
 
     @NotBlank(message = "La nacionalidad no puede estar vacía")

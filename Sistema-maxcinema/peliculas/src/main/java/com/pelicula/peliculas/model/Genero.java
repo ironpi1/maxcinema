@@ -2,7 +2,6 @@ package com.pelicula.peliculas.model;
 
 import java.util.List;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,7 +27,6 @@ public class Genero {
 
     @NotBlank(message = "El nombre del genero no puede estar vacio")
     @Size(min = 10, max = 50, message = "El nombre de la pelicula debe tener entre 4 y 50 caracteres")
-    @Column(nullable = false, length = 50)
     private String nombre;
 
     // Relación hacia la tabla puente

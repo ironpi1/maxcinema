@@ -1,6 +1,5 @@
 package com.pelicula.peliculas.model;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,6 +27,5 @@ public class SalasPelicula {
     @JoinColumn(name = "pelicula_id", nullable = false)
     private Pelicula pelicula;
 
-    @Column(name = "sala_id", nullable = false)
     private Integer salaId;
 }

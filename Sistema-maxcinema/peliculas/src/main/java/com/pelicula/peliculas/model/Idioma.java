@@ -2,7 +2,6 @@ package com.pelicula.peliculas.model;
 
 import java.util.List;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,7 +27,6 @@ public class Idioma {
 
     @NotBlank(message = "El nombre no puede estar vacio")
     @Size(min = 10, max = 20, message = "El nombre del idioma debe tener entre 10 y 20 caracteres")
-    @Column(nullable = false, length = 20)
     private String nombre;
 
     @OneToMany(mappedBy = "idioma")

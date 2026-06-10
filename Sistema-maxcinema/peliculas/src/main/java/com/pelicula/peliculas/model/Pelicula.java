@@ -2,7 +2,6 @@ package com.pelicula.peliculas.model;
 
 import java.util.List;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,12 +29,10 @@ public class Pelicula {
 
     @NotBlank(message = "El titulo no puede estar vacio")
     @Size(min = 4, max = 50, message = "El titulo de la pelicula debe tener entre 4 y 50 caracteres")
-    @Column(nullable = false, length = 50)
     private String titulo;
 
     @NotBlank(message = "La descripcion de la pelicula no puede estar vacia")
     @Size(min = 100, max = 250, message = "La descripcion de la pelicula debe tener entre 100 y 250 caracteres")
-    @Column(nullable = false, length = 250)
     private String descripcion;
 
     @Min(value = 60, message = "La duración mínima es 60 minutos")
@@ -45,7 +42,6 @@ public class Pelicula {
     @Min(value = 1, message = "El año debe ser mayor a 0")
     private Integer anioEstreno;
 
-    @Column(nullable = false)
     private String estado;
     
     @OneToMany(mappedBy = "pelicula")
