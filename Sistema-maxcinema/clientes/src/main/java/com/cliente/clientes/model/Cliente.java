@@ -2,14 +2,12 @@ package com.cliente.clientes.model;
 
 import java.util.List;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -17,8 +15,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-//@Data
-//@AllArgsConstructor
+@Data
+@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "clientes")
@@ -42,9 +40,6 @@ public class Cliente {
     @NotBlank(message = "el cliente debe tener un telefono")
     @Size(min = 15,max = 15,message = "maximo 15 caracteres")
     private String telefono;
-
-    //@OneToMany(mappedBy = "cliente")
-    //private List<Entrada> entradas;
 
     @ManyToOne
     @JoinColumn(name = "tipo_cliente_id")
