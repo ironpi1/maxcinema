@@ -1,0 +1,58 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      server:
+        webmvc:
+          routes:
+            - id: peliculas-service
+              uri: lb://peliculas
+              predicates:
+                - Path=/api/v1/peliculas/**, /api/v1/generos/**, /api/v1/directores/**, /api/v1/idiomas/**, /peliculas/api-docs/**
+
+            - id: cines-service
+              uri: lb://cines
+              predicates:
+                - Path=/api/v1/cine/**, /api/v1/comuna/**, /api/v1/region/**, /cines/api-docs/**
+
+            - id: salas-service
+              uri: lb://salas
+              predicates:
+                - Path=/api/v1/sala/**, /api/v1/tipo-sala/**, /salas/api-docs/**
+
+            - id: clientes-service
+              uri: lb://clientes
+              predicates:
+                - Path=/api/v1/clientes/**, /api/v1/tipo-cliente/**, /api/v1/metodo-pago/**, /clientes/api-docs/**
+
+            - id: entradas-reservas-service
+              uri: lb://entradas-reservas
+              predicates:
+                - Path=/api/v1/entradas/**, /entradas-reservas/api-docs/**
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui/index.html
+    urls:
+      - name: Microservicio Peliculas
+        url: /peliculas/api-docs
+      - name: Microservicio Cines
+        url: /cines/api-docs
+      - name: Microservicio Salas
+        url: /salas/api-docs
+      - name: Microservicio Clientes
+        url: /clientes/api-docs
+      - name: Microservicio Entradas-Reservas
+        url: /entradas-reservas/api-docs
+  api-docs:
+    enabled: true
+
