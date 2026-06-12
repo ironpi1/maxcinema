@@ -1,5 +1,4 @@
-package com.cliente.clientes.config;
-
+package com.cine.cines.config;
 
 @Configuration
 public class WebClientConfig {
