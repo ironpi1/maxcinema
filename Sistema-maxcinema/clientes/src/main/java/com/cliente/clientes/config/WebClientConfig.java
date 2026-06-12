@@ -1,5 +1,10 @@
 package com.cliente.clientes.config;
 
-public class WebClientConfig {
 
+@Configuration
+public class WebClientConfig {
+    @Bean 
+    public WebClientConfig.Builder WebClientConfig(){
+        return WebClient.Builder();
+    }
 }
