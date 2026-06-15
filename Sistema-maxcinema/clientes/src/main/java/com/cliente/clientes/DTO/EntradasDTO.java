@@ -1,9 +1,8 @@
-package com.maxcinema.maxcinema.DTO;
-
+package com.cliente.clientes.DTO;
 import lombok.Data;
 
 @Data
-public class EntradaDTO {
+public class EntradasDTO {
     private Integer id;
     private String tipoEntrada;
     private Float precio;
