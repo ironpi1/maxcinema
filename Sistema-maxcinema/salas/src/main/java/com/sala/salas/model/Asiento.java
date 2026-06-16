@@ -7,7 +7,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,20 +26,19 @@ public class Asiento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    
-    @NotBlank (message = "La fila es obligatoria")
-    @Size(min = 1, max = 2, message = "La fila no puede tener más de 2 dígitos")
-    @Column(nullable = false, length = 2)
+
+    @NotNull(message = "La fila es obligatoria")
+    @Min(1) @Max(99)
+    @Column(nullable = false)
     private Integer fila;
 
-    @NotBlank (message = "La columna es obligatoria")
-    @Size(max = 1, message = "La columna no puede tener más de 1 caracter")
+    @NotBlank(message = "La columna es obligatoria")
+    @Size(max = 1)
     @Column(nullable = false, length = 1)
     private String columna;
-    
-    @NotBlank (message = "El estado es obligatorio")
-    @Size(min = 1, max = 20, message = "El estado no puede tener más de 20 caracteres")
-    @Column(nullable = false, length = 20)
+
+    @NotNull(message = "El estado es obligatorio")
+    @Column(nullable = false)
     private Boolean estado;
 
     @ManyToOne

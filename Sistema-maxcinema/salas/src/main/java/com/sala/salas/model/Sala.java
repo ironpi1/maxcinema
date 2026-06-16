@@ -7,8 +7,6 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Id;
 
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.JoinColumn;
 import java.util.List;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
