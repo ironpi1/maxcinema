@@ -1,4 +1,4 @@
-package com.pelicula.peliculas.config;
+package com.sala.salas.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,8 +13,9 @@ public class SwaggerConfig {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
             .info(new Info()
-                .title("API Peliculas - MaxCinema")
+                .title("API Salas - MaxCinema")
                 .version("1.0")
-                .description("Documentación del microservicio de películas"));
+                .description("Documentación del microservicio de salas"));
     }
 }
+
