@@ -1,4 +1,4 @@
-package com.maxcinema.maxcinema.controller;
+package com.cliente.clientes.controller;
 
 import java.util.List;
 
@@ -14,20 +14,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.maxcinema.maxcinema.DTO.TipoClienteDTO;
-import com.maxcinema.maxcinema.model.TipoCliente;
-import com.maxcinema.maxcinema.service.TipoClienteService;
+import com.cliente.clientes.DTO.TiposDeClientesDTO;
+import com.cliente.clientes.model.TipoCliente;
+import com.cliente.clientes.service.TipoClienteService;
 
 @RestController
-@RequestMapping("/api/v1/TipoCliente")
+@RequestMapping("/api/v1/TiposDeClientes")
 public class TipoClienteController {
 
     @Autowired
     private TipoClienteService tipoClienteService;
 
     @GetMapping
-    public ResponseEntity<List<TipoClienteDTO>> todosLosMetodosDePago() {
-        List<TipoClienteDTO> metodos = tipoClienteService.obtenerTodos();
+    public ResponseEntity<List<TiposDeClientesDTO>> todosLosMetodosDePago() {
+        List<TiposDeClientesDTO> metodos = tipoClienteService.obtenerTodos();
         if (metodos.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
@@ -35,9 +35,9 @@ public class TipoClienteController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<TipoClienteDTO> buscarPorId(@PathVariable Integer id) {
+    public ResponseEntity<TiposDeClientesDTO> buscarPorId(@PathVariable Integer id) {
         try {
-            TipoClienteDTO metodo = tipoClienteService.buscarPorId(id);
+            TiposDeClientesDTO metodo = tipoClienteService.buscarPorId(id);
             return new ResponseEntity<>(metodo, HttpStatus.OK);
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
