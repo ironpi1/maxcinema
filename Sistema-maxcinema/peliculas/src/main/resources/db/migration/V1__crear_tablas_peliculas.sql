@@ -1,15 +1,15 @@
 CREATE TABLE pelicula (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    titulo VARCHAR2(50) NOT NULL,
-    descripcion VARCHAR2(250) NOT NULL,
+    titulo VARCHAR(50) NOT NULL,
+    descripcion VARCHAR(250) NOT NULL,
     duracion INT,
     anioEstreno INT,
-    estado VARCHAR2(20)
+    estado VARCHAR(20)
 );
 
 CREATE TABLE genero (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR2(50) NOT NULL
+    nombre VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE generos (
@@ -22,7 +22,7 @@ CREATE TABLE generos (
 
 CREATE TABLE director (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR2(50) NOT NULL,
+    nombre VARCHAR(50) NOT NULL,
     nacionalidad VARCHAR(50) NOT NULL
 );
 
@@ -31,12 +31,12 @@ CREATE TABLE directores (
     director_id INT NOT NULL,
     pelicula_id INT NOT NULL,
     CONSTRAINT fk_directores_director FOREIGN KEY (director_id) REFERENCES director(id),
-    CONSTRAINT fk_directores_pelicula FOREIGN KEY (pelicula_id) REFERENCES pelicula(id),
+    CONSTRAINT fk_directores_pelicula FOREIGN KEY (pelicula_id) REFERENCES pelicula(id)
 );
 
 CREATE TABLE idioma (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR2(20) NOT NULL
+    nombre VARCHAR(20) NOT NULL
 );
 
 CREATE TABLE idiomas (
@@ -52,4 +52,4 @@ CREATE TABLE salasPelicula (
     pelicula_id INT NOT NULL,
     sala_id INT NOT NULL,
     CONSTRAINT fk_salaspelicula_pelicula FOREIGN KEY (pelicula_id) REFERENCES pelicula(id)
-)
+);
