@@ -60,5 +60,4 @@ class PeliculasApplicationTests {
 
 		verify(peliculaRepository, times(1)).findById(idSimulado);
 	}
-
 }

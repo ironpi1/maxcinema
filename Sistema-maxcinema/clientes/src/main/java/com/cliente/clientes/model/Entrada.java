@@ -41,6 +41,10 @@ public class Entrada {
     @Column(nullable = false, length = 20)
     private String horario;
 
+    @NotNull(message = "Debe especificar la pelicula")
+    @Column(name = "pelicula_id", nullable = false)
+    private Integer peliculaId;
+
     @ManyToOne
     @JoinColumn(name = "metodo_pago_id")
     private MetodoPago metodoPago;
