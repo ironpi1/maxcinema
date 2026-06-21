@@ -6,14 +6,18 @@ CREATE TABLE clientes(
     telefono VARCHAR2(15) NOT NULL
 );
 
-CREATE TABLE comuna (
+CREATE TABLE entradas(
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR2(25) NOT NULL
+    tipo_entrada VARCHAR2(10) NOT NULL,
+    precio FLOAT(9) NOT NULL,
+    cantidad INT(1) NOT NULL,
+    horario VARCHAR2(20) NOT NULL,
+    pelicula_id INT NOT NULL
 );
 
-CREATE TABLE region (
+CREATE TABLE metodo_pago(
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR2(25) NOT NULL
+    tipo_pago VARCHAR2(50) NOT NULL
 );
 
 CREATE TABLE tipo_cliente(

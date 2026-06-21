@@ -1,4 +1,4 @@
-CREATE TABLE Sala (
+CREATE TABLE sala (
     id            INT AUTO_INCREMENT PRIMARY KEY,
     nombre        VARCHAR(12) NOT NULL,
     numeroDeSala  INT         NOT NULL DEFAULT 1
