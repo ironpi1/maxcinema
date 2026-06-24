@@ -20,7 +20,7 @@ import com.cine.cines.model.Region;
 import com.cine.cines.service.RegionService;
 
 @RestController
-@RequestMapping("/api/v1/region")
+@RequestMapping("/api/v1/regiones")
 public class RegionController {
     
     @Autowired
