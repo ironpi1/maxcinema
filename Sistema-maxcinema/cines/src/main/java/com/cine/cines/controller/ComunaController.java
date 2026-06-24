@@ -21,7 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 
 @RestController
-@RequestMapping("/api/v1/comuna")
+@RequestMapping("/api/v1/comunas")
 public class ComunaController {
     @Autowired
     private ComunaService comunaService;

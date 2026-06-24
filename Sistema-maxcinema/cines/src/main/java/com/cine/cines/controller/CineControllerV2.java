@@ -21,8 +21,8 @@ import com.cine.cines.service.CineService;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
-@RequestMapping("/api/v1/cines")
-public class CineController {
+@RequestMapping("/api/v2/cines")
+public class CineControllerV2 {
     @Autowired
     private CineService cineService;
 
@@ -85,3 +85,4 @@ public class CineController {
         }
     }
 }
+
