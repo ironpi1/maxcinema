@@ -25,3 +25,31 @@ CREATE TABLE tipo_cliente(
     tipo VARCHAR(50) NOT NULL,
     descuento FLOAT(10) NOT NULL
 );
+
+INSERT INTO 
+    clientes (nombre, rut, email, telefono) 
+VALUES 
+    ('Juan Pérez', '12345678-9', 'juan.perez@email.com', '+56912345678'),
+    ('María González', '98765432-K', 'maria.g@email.com', '+56987654321'),
+    ('Pedro Soto', '112233445', 'pedro.soto@email.com', '+56911223344');
+
+INSERT INTO 
+    entradas (tipo_entrada, precio, cantidad, horario, pelicula_id)
+VALUES 
+    ('2D Normal', 5000.0, 2, '15:30', 101),
+    ('4DX', 7500.0, 1, '18:00', 102),
+    ('Palco Premier', 9500.0, 4, '21:15', 103);
+
+INSERT INTO 
+    metodo_pago (tipo_pago) 
+VALUES 
+    ('Tarjeta de Crédito'),
+    ('Tarjeta de Débito'),
+    ('Efectivo');
+
+INSERT INTO 
+    tipo_cliente (tipo, descuento) 
+VALUES 
+    ('General', 0.0),
+    ('Estudiante', 15.0),
+    ('Tercera Edad', 30.0);
