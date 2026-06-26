@@ -53,3 +53,59 @@ CREATE TABLE salasPelicula (
     sala_id INT NOT NULL,
     CONSTRAINT fk_salaspelicula_pelicula FOREIGN KEY (pelicula_id) REFERENCES pelicula(id)
 );
+
+INSERT INTO 
+    pelicula (titulo, descripcion, duracion, anioEstreno, estado) 
+VALUES 
+    ('La Odisea', 'Relato de antiguos mitos y leyendas griegas.', 120, 2026, 'Pre-Venta'),
+    ('Scary Movie 6', 'Comedia satírica a películas de terror.', 95, 2026, 'Cartelera'),
+    ('Spider-Man: Un Nuevo día', 'El renacer de peter parker como Spider-Man.', 105, 2026, 'Próximamente');
+
+INSERT INTO 
+    genero (nombre) 
+VALUES 
+    ('Ciencia Ficción'),
+    ('Comedia'),
+    ('Terror');
+
+INSERT INTO 
+    generos (pelicula_id, genero_id) 
+VALUES 
+    (1, 1),
+    (2, 2),
+    (3, 3); 
+
+INSERT INTO 
+    director (nombre, nacionalidad) 
+VALUES 
+    ('Christopher Nolan', 'Británica'),
+    ('Michael Tiddes', 'Estadounidense'),
+    ('Destin Cretton', 'Estadounidense');
+
+INSERT INTO 
+    directores (director_id, pelicula_id)
+VALUES 
+    (1, 1),
+    (2, 2),
+    (3, 3);
+
+INSERT INTO 
+    idioma (nombre) 
+VALUES 
+    ('Español Latino'),
+    ('Inglés Subtitulado'),
+    ('Inglés');
+
+INSERT INTO 
+    idiomas (pelicula_id, idioma_id) 
+VALUES 
+    (1, 2),
+    (2, 1),
+    (3, 2);
+
+INSERT INTO 
+    salasPelicula (pelicula_id, sala_id)
+VALUES 
+    (1, 1),
+    (2, 2),
+    (3, 3);
