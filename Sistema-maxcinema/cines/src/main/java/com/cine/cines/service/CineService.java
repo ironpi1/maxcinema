@@ -35,9 +35,11 @@ public class CineService {
             .toList();
     }
 
-    public CineDTO guardarCine(Cine cine){
-        Cine guardado = cineRepository.save(cine);
-        return convertirADTO(guardado);
+    public CineDTO guardarCine(CineDTO dto){
+        Cine cine = new Cine();
+        cine.setNombre(dto.getNombre());
+        cine.setDireccion(dto.getDireccion());
+        return convertirADTO(cineRepository.save(cine));
     }
 
     public String eliminarCine(Integer id){
@@ -51,17 +53,12 @@ public class CineService {
             return e.getMessage();
         }
     }
-    public CineDTO actualizarCine(Integer id, Cine cine){
-        Cine cine2 = cineRepository.findById(id)
-        .orElseThrow(() -> new RuntimeException("imposible de encontrar con id, el id" + id + "no existe"));
-
-        if(cine.getNombre() != null){
-            cine2.setNombre(cine.getNombre());
-        }
-        if(cine.getDireccion() != null){
-            cine2.setDireccion(cine.getDireccion());
-        }
-        return convertirADTO(cineRepository.save(cine2));
+    public CineDTO actualizarCine(Integer id, CineDTO dto){
+        Cine cine = cineRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("No se encontró el cine con ID: " + id));
+        cine.setNombre(dto.getNombre());
+        cine.setDireccion(dto.getDireccion());
+        return convertirADTO(cineRepository.save(cine));
     }
 
     public List<CineDTO> buscarCinePorNombre(String nombre){
