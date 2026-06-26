@@ -46,7 +46,7 @@ public class CineController {
     }
 
     @PostMapping
-    public ResponseEntity<CineDTO> agregarCine(@RequestBody Cine cine) {
+    public ResponseEntity<CineDTO> agregarCine(@RequestBody CineDTO cine) {
         try {
             CineDTO guardado = cineService.guardarCine(cine);
             return new ResponseEntity<>(guardado, HttpStatus.CREATED);
@@ -56,7 +56,7 @@ public class CineController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<CineDTO> editarCine(@PathVariable Integer id, @RequestBody Cine cine) {
+    public ResponseEntity<CineDTO> editarCine(@PathVariable Integer id, @RequestBody CineDTO cine) {
         try {
             CineDTO editado = cineService.actualizarCine(id, cine);
             return new ResponseEntity<>(editado, HttpStatus.OK);
@@ -66,7 +66,7 @@ public class CineController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CineDTO> actualizarCine(@PathVariable Integer id, @RequestBody Cine cine) {
+    public ResponseEntity<CineDTO> actualizarCine(@PathVariable Integer id, @RequestBody CineDTO cine) {
         try {
             CineDTO newCine = cineService.actualizarCine(id, cine);
             return new ResponseEntity<>(newCine, HttpStatus.OK);
