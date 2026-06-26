@@ -5,7 +5,7 @@ import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
 
 import com.pelicula.peliculas.DTO.IdiomaDTO;
-import com.pelicula.peliculas.controller.v2.IdiomaControllerV2;
+import com.pelicula.peliculas.controller.V2.IdiomaControllerV2;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
