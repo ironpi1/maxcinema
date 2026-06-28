@@ -48,9 +48,9 @@ public class ClienteController {
     }
 
     @PostMapping
-    public ResponseEntity<Cliente> agregarCliente(@RequestBody Cliente cliente) {
+    public ResponseEntity<ClienteDTO> agregarCliente(@RequestBody Cliente cliente) {
         try {
-            Cliente guardado = clienteService.agregarCliente(cliente);
+            ClienteDTO guardado = clienteService.agregarCliente(cliente);
             return new ResponseEntity<>(guardado, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -58,9 +58,9 @@ public class ClienteController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Cliente> actualizarCliente(@PathVariable Integer id, @RequestBody Cliente cliente) {
+    public ResponseEntity<ClienteDTO> actualizarCliente(@PathVariable Integer id, @RequestBody Cliente cliente) {
         try{
-            Cliente newCliente = clienteService.editarCliente(id, cliente);
+            ClienteDTO newCliente = clienteService.editarCliente(id, cliente);
             return new ResponseEntity<>(newCliente, HttpStatus.OK);
         }catch (RuntimeException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

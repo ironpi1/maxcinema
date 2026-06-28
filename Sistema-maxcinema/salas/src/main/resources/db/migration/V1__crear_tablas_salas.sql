@@ -1,17 +1,17 @@
 CREATE TABLE sala (
     id            INT AUTO_INCREMENT PRIMARY KEY,
-    nombre        VARCHAR(12) NOT NULL,
+    nombre        VARCHAR(50) NOT NULL,
     numeroDeSala  INT         NOT NULL DEFAULT 1
 );
  
 CREATE TABLE tipo_sala (
     id      INT AUTO_INCREMENT PRIMARY KEY,
-    nombre  VARCHAR(17) NOT NULL
+    nombre  VARCHAR(50) NOT NULL
 );
  
 CREATE TABLE tipos_sala (
     id           INT AUTO_INCREMENT PRIMARY KEY,
-    nombre       VARCHAR(14) NOT NULL,
+    nombre       VARCHAR(50) NOT NULL,
     sala_id      INT,
     TipoSala_id  INT,
     CONSTRAINT fk_tipossalas_sala     FOREIGN KEY (sala_id)     REFERENCES Sala(id),

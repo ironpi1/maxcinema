@@ -23,20 +23,20 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotBlank(message = "Nombre del ciente es obligatorio")
-    @Size(min = 5, max = 100, message = "minimo de 5 caracteres")
+    @NotBlank(message = "Nombre del cliente es obligatorio")
+    @Size(min = 3, max = 100, message = "mínimo de 3 caracteres")
     private String nombre;
 
     @NotBlank(message = "el cliente debe tener un rut")
-    @Size(min = 9,max = 9,message = "maximo 9 caracteres")
+    @Size(min = 8, max = 12, message = "entre 8 y 12 caracteres")
     private String rut;
 
     @NotBlank(message = "el cliente debe tener un email")
-    @Size(min = 20,max = 100,message = "maximo de 100 caracteres")
+    @Size(min = 10, max = 100, message = "entre 10 y 100 caracteres")
     private String email;
 
     @NotBlank(message = "el cliente debe tener un telefono")
-    @Size(min = 15,max = 15,message = "maximo 15 caracteres")
+    @Size(min = 8, max = 15, message = "entre 8 y 15 caracteres")
     private String telefono;
 
     @ManyToOne

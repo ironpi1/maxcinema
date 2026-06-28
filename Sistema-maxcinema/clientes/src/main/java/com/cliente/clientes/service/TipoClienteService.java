@@ -24,16 +24,16 @@ public class TipoClienteService {
         return convertirADTO(tipoCliente);
     }
 
-    public TipoCliente agregarTipoCliente(TipoCliente tipoCliente) {
-        return tipoClienteRepository.save(tipoCliente);
+    public TiposDeClientesDTO agregarTipoCliente(TipoCliente tipoCliente) {
+        return convertirADTO(tipoClienteRepository.save(tipoCliente));
     }
 
-    public TipoCliente editarTipoCliente(Integer id, TipoCliente tipoCliente) {
+    public TiposDeClientesDTO editarTipoCliente(Integer id, TipoCliente tipoCliente) {
         TipoCliente tipo = tipoClienteRepository.findById(id).orElseThrow(() -> new RuntimeException("Tipo de cliente no encontrado"));
         if (tipo.getTipo() != null) {
             tipo.setTipo(tipoCliente.getTipo());
         }
-        return tipoClienteRepository.save(tipo);
+        return convertirADTO(tipoClienteRepository.save(tipo));
     }
 
     public String eliminarTipoCliente(Integer id) {

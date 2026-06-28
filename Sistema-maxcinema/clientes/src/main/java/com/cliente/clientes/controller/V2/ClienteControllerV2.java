@@ -1,8 +1,14 @@
 package com.cliente.clientes.controller.V2;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,15 +23,18 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cliente.clientes.DTO.ClienteDTO;
 import com.cliente.clientes.model.Cliente;
 import com.cliente.clientes.service.ClienteService;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Controller;
 import com.cliente.clientes.assemblers.ClienteModelAssembler;
 
 @RestController
 @RequestMapping("/api/v2/clientes")
 @Slf4j
-@Controller
+@Tag(name = "Clientes V2", description = "Operaciones HATEOAS sobre clientes")
 public class ClienteControllerV2 {
+    
     @Autowired
     private ClienteService clienteService;
 
@@ -33,51 +42,62 @@ public class ClienteControllerV2 {
     private ClienteModelAssembler assemblerClientes;
 
     @GetMapping
-    public ResponseEntity<List<ClienteDTO>> todosLosClientes() {
-        List<ClienteDTO> clientes = clienteService.obtenerTodos();
+    @Operation(summary = "Listar todos los clientes con links HATEOAS")
+    public ResponseEntity<CollectionModel<EntityModel<ClienteDTO>>> todosLosClientes() {
+        List<EntityModel<ClienteDTO>> clientes = clienteService.obtenerTodos()
+            .stream()
+            .map(assemblerClientes::toModel)
+            .collect(Collectors.toList());
         if (clientes.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(clientes, HttpStatus.OK);
+        CollectionModel<EntityModel<ClienteDTO>> collection = CollectionModel.of(clientes,
+            linkTo(methodOn(ClienteControllerV2.class).todosLosClientes()).withSelfRel());
+        
+        return ResponseEntity.ok(collection);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ClienteDTO> buscarPorId(@PathVariable Integer id) {
+    @Operation(summary = "Buscar un cliente por ID con links HATEOAS")
+    public ResponseEntity<EntityModel<ClienteDTO>> buscarPorId(@PathVariable Integer id) {
         try {
             ClienteDTO cliente = clienteService.buscarPorId(id);
-            return new ResponseEntity<>(cliente, HttpStatus.OK);
+            return ResponseEntity.ok(assemblerClientes.toModel(cliente));
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
         }
     }
 
     @PostMapping
-    public ResponseEntity<Cliente> agregarCliente(@RequestBody Cliente cliente) {
+    @Operation(summary = "Agregar un nuevo cliente con links HATEOAS")
+    public ResponseEntity<EntityModel<ClienteDTO>> agregarCliente(@RequestBody Cliente cliente) {
         try {
-            Cliente guardado = clienteService.agregarCliente(cliente);
-            return new ResponseEntity<>(guardado, HttpStatus.CREATED);
+            ClienteDTO guardado = clienteService.agregarCliente(cliente);
+            return ResponseEntity.status(HttpStatus.CREATED).body(assemblerClientes.toModel(guardado));
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Cliente> actualizarCliente(@PathVariable Integer id, @RequestBody Cliente cliente) {
-        try{
-            Cliente newCliente = clienteService.editarCliente(id, cliente);
-            return new ResponseEntity<>(newCliente, HttpStatus.OK);
-        }catch (RuntimeException e) {
+    @Operation(summary = "Actualizar una comuna existente con links HATEOAS")
+    public ResponseEntity<EntityModel<ClienteDTO>> actualizarComuna(@PathVariable Integer id, @RequestBody Cliente cliente) {
+        try {
+            ClienteDTO newCliente = clienteService.editarCliente(id, cliente);
+            return ResponseEntity.ok(assemblerClientes.toModel(newCliente));
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> eliminarCliente(@PathVariable Integer id) {
-        String resultado = clienteService.eliminarCliente(id);
-        if (resultado.contains("exitosamente")) {
-            return new ResponseEntity<>(resultado, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(resultado, HttpStatus.NOT_FOUND);
+    @Operation(summary = "Eliminar un cliente por ID")
+    public ResponseEntity<Void> eliminarCliente(@PathVariable Integer id) {
+        try {
+            clienteService.eliminarCliente(id);
+            return ResponseEntity.noContent().build();
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
         }
     }
 }

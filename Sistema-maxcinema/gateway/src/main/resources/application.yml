@@ -12,22 +12,22 @@ spring:
             - id: peliculas-service
               uri: lb://peliculas
               predicates:
-                - Path=/api/v1/peliculas/**, /api/v1/generos/**, /api/v1/generos-pelicula/**, /api/v1/directores/**, /api/v1/directores-pelicula/**, /api/v1/idiomas/**, /api/v1/idiomas-pelicula/**, /api/v1/salas-pelicula/**, /peliculas/api-docs/**
+                - Path=/api/v1/peliculas/**, /api/v2/peliculas/**, /api/v1/generos/**, /api/v2/generos/**, /api/v1/generos-pelicula/**, /api/v2/generos-pelicula/**, /api/v1/directores/**, /api/v2/directores/**, /api/v1/directores-pelicula/**, /api/v2/directores-pelicula/**, /api/v1/idiomas/**, /api/v2/idiomas/**, /api/v1/idiomas-pelicula/**, /api/v2/idiomas-pelicula/**, /api/v1/salas-pelicula/**, /api/v2/salas-pelicula/**, /peliculas/api-docs/**
 
             - id: cines-service
               uri: lb://cines
               predicates:
-                - Path=/api/v1/cine/**, /api/v1/comuna/**, /api/v1/region/**, /cines/api-docs/**
+                - Path=/api/v1/cine/**, /api/v2/cine/**, /api/v1/cines/**, /api/v2/cines/**, /api/v1/comuna/**, /api/v2/comuna/**, /api/v1/region/**, /api/v2/region/**, /cines/api-docs/**
 
             - id: salas-service
               uri: lb://salas
               predicates:
-                - Path=/api/v1/sala/**, /api/v1/tipo-sala/**, /api/v1/tipos-salas/**, /salas/api-docs/**
+                - Path=/api/v1/sala/**, /api/v2/sala/**, /api/v1/salas/**, /api/v2/salas/**, /api/v1/tipo-sala/**, /api/v2/tipo-sala/**, /api/v1/tipos-salas/**, /api/v2/tipos-salas/**, /salas/api-docs/**
 
             - id: clientes-service
               uri: lb://clientes
               predicates:
-                - Path=/api/v1/clientes/**, /api/v1/tipo-cliente/**, /api/v1/metodo-pago/**, /api/v1/asientos/**, /api/v1/tipo-asiento/**, /api/v1/entradas/**, /clientes/api-docs/**
+                - Path=/api/v1/clientes/**, /api/v2/clientes/**, /api/v1/tipo-cliente/**, /api/v2/tipo-cliente/**, /api/v1/metodo-pago/**, /api/v2/metodo-pago/**, /api/v1/asientos/**, /api/v2/asientos/**, /api/v1/tipo-asiento/**, /api/v2/tipo-asiento/**, /api/v1/entradas/**, /api/v2/entradas/**, /clientes/api-docs/**
 
 eureka:
   client:

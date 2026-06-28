@@ -59,12 +59,8 @@ public class EntradaController {
 
     @PutMapping("/{id}")
     public ResponseEntity<EntradasDTO> actualizarEntrada(@PathVariable Integer id, @RequestBody Entrada entrada) {
-        try{
-            Entrada newEntrada = entradaService.editarEntrada(id, entrada);
-            return new ResponseEntity<>(entradaService.convertirADTO(newEntrada), HttpStatus.OK);
-        }catch (RuntimeException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        log.debug("PUT /entradas/{}",id);
+        return ResponseEntity.ok(entradaService.editarEntrada(id, entrada));
     }
 
     @DeleteMapping("/{id}")

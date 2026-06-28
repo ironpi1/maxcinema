@@ -28,12 +28,12 @@ public class MetodoPagoService {
         return metodoPagoRepository.save(metodoPago);
     }
 
-    public MetodoPago editarMetodoPago(Integer id, MetodoPago metodoPago) {
-        MetodoPago metodo = metodoPagoRepository.findById(id).orElseThrow(() -> new RuntimeException("Método de pago no encontrado"));
-        if (metodoPago.getTipoPago() != null) {
-            metodo.setTipoPago(metodoPago.getTipoPago());
-        }
-        return metodoPagoRepository.save(metodo);
+    public MetodosDePagoDTO editarMetodoPago(Integer id, MetodoPago metodoPago) {
+        MetodoPago metodoPagoExistente = metodoPagoRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Método de pago no encontrado"));
+        metodoPagoExistente.setTipoPago(metodoPago.getTipoPago());
+        MetodoPago metodoPagoActualizado = metodoPagoRepository.save(metodoPagoExistente);
+        return convertirADTO(metodoPagoActualizado);
     }
 
     public String eliminarMetodoPago(Integer id) {

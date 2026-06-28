@@ -12,8 +12,10 @@ import com.cliente.clientes.DTO.PeliculaExternaDTO;
 import com.cliente.clientes.model.Entrada;
 import com.cliente.clientes.repository.EntradaRepository;
 
+import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
+@Slf4j
 @Service
 public class EntradaService {
     @Autowired
@@ -38,30 +40,20 @@ public class EntradaService {
         return entradaRepository.save(entrada);
     }
 
-    public Entrada editarEntrada(Integer id, Entrada entrada) {
-        Entrada ticket = entradaRepository.findById(id).orElseThrow(() -> new RuntimeException("Entrada no existe"));
-        if (entrada.getPeliculaId() != null) {
-            ticket.setPeliculaId(entrada.getPeliculaId());
-        }
-        if (entrada.getCliente() != null) {
-            ticket.setCliente(entrada.getCliente());
-        }
-        if (entrada.getTipoEntrada() != null) {
-            ticket.setTipoEntrada(entrada.getTipoEntrada());
-        }
-        if (entrada.getPrecio() != null) {
-            ticket.setPrecio(entrada.getPrecio());
-        }
-        if (entrada.getCantidad() != null) {
-            ticket.setCantidad(entrada.getCantidad());
-        }
-        if (entrada.getHorario() != null) {
-            ticket.setHorario(entrada.getHorario());
-        }
-        if (entrada.getMetodoPago() != null) {
-            ticket.setMetodoPago(entrada.getMetodoPago());
-        }
-        return entradaRepository.save(ticket);
+    public EntradasDTO editarEntrada(Integer id, Entrada entradan) {
+        log.info("Editando entrada con ID: {}", id);
+        Entrada existingEntrada = entradaRepository.findById(id)
+            .orElseThrow(() -> {
+                log.warn("No se encontró entrada con ID: {}", id);
+                return new RuntimeException("Entrada no encontrada");
+            });
+        existingEntrada.setTipoEntrada(entradan.getTipoEntrada());
+        existingEntrada.setPrecio(entradan.getPrecio());
+        existingEntrada.setCantidad(entradan.getCantidad());
+        existingEntrada.setHorario(entradan.getHorario());
+        Entrada guardada = entradaRepository.save(existingEntrada);
+        log.info("Entrada actualizada exitosamente con ID: {}", guardada.getId());
+        return convertirADTO(guardada);
     }
 
     public String cancelarEntrada(Integer id) {
@@ -75,14 +67,14 @@ public class EntradaService {
         }
     }
 
-    public EntradasDTO convertirADTO(Entrada entrada) {
+    public EntradasDTO convertirADTO(Entrada guardado) {
         EntradasDTO dto = new EntradasDTO();
-        dto.setId(entrada.getId());
-        dto.setHorario(entrada.getHorario().toString());
-        dto.setTipoEntrada(entrada.getTipoEntrada());
-        dto.setCliente(entrada.getCliente().getRut());
+        dto.setId(guardado.getId());
+        dto.setHorario(guardado.getHorario().toString());
+        dto.setTipoEntrada(guardado.getTipoEntrada());
+        dto.setCliente(guardado.getCliente().getRut());
 
-        PeliculaExternaDTO pelicula = obtenerPelicula(entrada.getPeliculaId());
+        PeliculaExternaDTO pelicula = obtenerPelicula(guardado.getPeliculaId());
         dto.setPelicula(pelicula != null ? pelicula.getTitulo() : "Pelicula no disponible");
        return dto;
     }
