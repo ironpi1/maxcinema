@@ -8,6 +8,9 @@ import com.cliente.clientes.DTO.ClienteDTO;
 import com.cliente.clientes.model.Cliente;
 import com.cliente.clientes.repository.ClienteRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class ClienteService {
     @Autowired
@@ -25,25 +28,22 @@ public class ClienteService {
         return convertirADTO(cliente);
     }
 
-    public Cliente agregarCliente(Cliente cliente) {
-        return clienteRepository.save(cliente);
+    public ClienteDTO agregarCliente(Cliente cliente) {
+        return convertirADTO(clienteRepository.save(cliente));
     }
 
-    public Cliente editarCliente(Integer id, Cliente cliente) {
-        Cliente client = clienteRepository.findById(id).orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
-        if (cliente.getNombre() != null) {
-            client.setNombre(cliente.getNombre());
-        }
-        if (cliente.getRut() != null) {
-            client.setRut(cliente.getRut());
-        }
-        if (cliente.getEmail() != null) {
-            client.setEmail(cliente.getEmail());
-        }
-        if (cliente.getTelefono() != null) {
-            client.setTelefono(cliente.getTelefono());
-        }
-        return clienteRepository.save(client);
+    public ClienteDTO editarCliente(Integer id, Cliente cliente) {
+        log.info("Editando cliente con ID: {}", id);
+        Cliente clienteExistente = clienteRepository.findById(id)
+            .orElseThrow(() -> {
+                log.warn("No se encontró cliente con ID: {}", id);
+                return new RuntimeException("Cliente no encontrado");
+            });
+        clienteExistente.setNombre(cliente.getNombre());
+        clienteExistente.setRut(cliente.getRut());
+        Cliente clienteActualizado = clienteRepository.save(clienteExistente);
+        log.info("Cliente actualizado exitosamente con ID: {}", clienteActualizado.getId());
+        return convertirADTO(clienteActualizado);
     }
 
     public String eliminarCliente(Integer id) {

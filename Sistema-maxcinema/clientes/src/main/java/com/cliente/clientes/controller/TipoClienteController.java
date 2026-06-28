@@ -44,9 +44,9 @@ public class TipoClienteController {
     }
 
     @PostMapping
-    public ResponseEntity<TipoCliente> agregarTipoCliente(@RequestBody TipoCliente tipoCliente) {
+    public ResponseEntity<TiposDeClientesDTO> agregarTipoCliente(@RequestBody TipoCliente tipoCliente) {
         try {
-            TipoCliente guardado = tipoClienteService.agregarTipoCliente(tipoCliente);
+            TiposDeClientesDTO guardado = tipoClienteService.agregarTipoCliente(tipoCliente);
             return new ResponseEntity<>(guardado, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -54,9 +54,9 @@ public class TipoClienteController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TipoCliente> actualizarTipoCliente(@PathVariable Integer id, @RequestBody TipoCliente tipoCliente) {
+    public ResponseEntity<TiposDeClientesDTO> actualizarTipoCliente(@PathVariable Integer id, @RequestBody TipoCliente tipoCliente) {
         try{
-            TipoCliente newTipoCliente = tipoClienteService.editarTipoCliente(id, tipoCliente);
+            TiposDeClientesDTO newTipoCliente = tipoClienteService.editarTipoCliente(id, tipoCliente);
             return new ResponseEntity<>(newTipoCliente, HttpStatus.OK);
         }catch (RuntimeException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -64,12 +64,12 @@ public class TipoClienteController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> eliminarTipoCliente(@PathVariable Integer id) {
-        String resultado = tipoClienteService.eliminarTipoCliente(id);
-        if (resultado.contains("exitosamente")) {
-            return new ResponseEntity<>(resultado, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(resultado, HttpStatus.NOT_FOUND);
+    public ResponseEntity<Void> eliminarTipoCliente(@PathVariable Integer id) {
+        try {
+            tipoClienteService.eliminarTipoCliente(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 }

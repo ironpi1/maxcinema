@@ -56,13 +56,9 @@ public class MetodoPagoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<MetodoPago> actualizarMetodoDePago(@PathVariable Integer id, @RequestBody MetodoPago metodoPago) {
-        try{
-            MetodoPago newMetodoPago = metodoPagoService.editarMetodoPago(id, metodoPago);
-            return new ResponseEntity<>(newMetodoPago, HttpStatus.OK);
-        }catch (RuntimeException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<MetodosDePagoDTO> actualizarMetodoDePago(@PathVariable Integer id, @RequestBody MetodoPago metodoPago) {
+        log.debug("PUT /metodos-pago/{}",id);
+        return ResponseEntity.ok(metodoPagoService.editarMetodoPago(id, metodoPago));
     }
 
     @DeleteMapping("/{id}")
