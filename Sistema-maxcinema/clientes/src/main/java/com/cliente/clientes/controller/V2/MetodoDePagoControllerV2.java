@@ -1,4 +1,4 @@
-package com.cliente.clientes.controller;
+package com.cliente.clientes.controller.V2;
 
 import java.util.List;
 
@@ -14,19 +14,25 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cliente.clientes.DTO.TiposDeClientesDTO;
-import com.cliente.clientes.model.TipoCliente;
-import com.cliente.clientes.service.TipoClienteService;
+import com.cliente.clientes.DTO.MetodosDePagoDTO;
+import com.cliente.clientes.model.MetodoPago;
+import com.cliente.clientes.service.MetodoPagoService;
+import com.cliente.clientes.assemblers.MetodoDePagoAssembler;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@RequestMapping("/api/v1/TiposDeClientes")
-public class TipoClienteController {
+@RequestMapping("/api/v2/metodosPago")
+@Slf4j
+public class MetodoDePagoControllerV2 {
     @Autowired
-    private TipoClienteService tipoClienteService;
+    private MetodoPagoService metodoPagoService;
+
+    @Autowired
+    private MetodoDePagoAssembler metodoDePagoAssembler;
 
     @GetMapping
-    public ResponseEntity<List<TiposDeClientesDTO>> todosLosMetodosDePago() {
-        List<TiposDeClientesDTO> metodos = tipoClienteService.obtenerTodos();
+    public ResponseEntity<List<MetodosDePagoDTO>> todosLosMetodosDePago() {
+        List<MetodosDePagoDTO> metodos = metodoPagoService.obtenerTodos();
         if (metodos.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
@@ -34,9 +40,9 @@ public class TipoClienteController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<TiposDeClientesDTO> buscarPorId(@PathVariable Integer id) {
+    public ResponseEntity<MetodosDePagoDTO> buscarPorId(@PathVariable Integer id) {
         try {
-            TiposDeClientesDTO metodo = tipoClienteService.buscarPorId(id);
+            MetodosDePagoDTO metodo = metodoPagoService.buscarPorId(id);
             return new ResponseEntity<>(metodo, HttpStatus.OK);
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
@@ -44,9 +50,9 @@ public class TipoClienteController {
     }
 
     @PostMapping
-    public ResponseEntity<TipoCliente> agregarTipoCliente(@RequestBody TipoCliente tipoCliente) {
+    public ResponseEntity<MetodoPago> agregarMetodoDePago(@RequestBody MetodoPago metodoPago) {
         try {
-            TipoCliente guardado = tipoClienteService.agregarTipoCliente(tipoCliente);
+            MetodoPago guardado = metodoPagoService.agregarrMetodoPago(metodoPago);
             return new ResponseEntity<>(guardado, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -54,18 +60,18 @@ public class TipoClienteController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TipoCliente> actualizarTipoCliente(@PathVariable Integer id, @RequestBody TipoCliente tipoCliente) {
+    public ResponseEntity<MetodoPago> actualizarMetodoDePago(@PathVariable Integer id, @RequestBody MetodoPago metodoPago) {
         try{
-            TipoCliente newTipoCliente = tipoClienteService.editarTipoCliente(id, tipoCliente);
-            return new ResponseEntity<>(newTipoCliente, HttpStatus.OK);
+            MetodoPago newMetodoPago = metodoPagoService.editarMetodoPago(id, metodoPago);
+            return new ResponseEntity<>(newMetodoPago, HttpStatus.OK);
         }catch (RuntimeException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> eliminarTipoCliente(@PathVariable Integer id) {
-        String resultado = tipoClienteService.eliminarTipoCliente(id);
+    public ResponseEntity<String> cancelarMetodoDePago(@PathVariable Integer id) {
+        String resultado = metodoPagoService.eliminarMetodoPago(id);
         if (resultado.contains("exitosamente")) {
             return new ResponseEntity<>(resultado, HttpStatus.OK);
         } else {

@@ -1,4 +1,4 @@
-package com.cliente.clientes.controller;
+package com.cliente.clientes.controller.V2;
 
 import java.util.List;
 
@@ -14,39 +14,47 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cliente.clientes.DTO.TiposDeClientesDTO;
-import com.cliente.clientes.model.TipoCliente;
-import com.cliente.clientes.service.TipoClienteService;
+import com.cliente.clientes.DTO.ClienteDTO;
+import com.cliente.clientes.model.Cliente;
+import com.cliente.clientes.service.ClienteService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Controller;
+import com.cliente.clientes.assemblers.ClienteModelAssembler;
 
 @RestController
-@RequestMapping("/api/v1/TiposDeClientes")
-public class TipoClienteController {
+@RequestMapping("/api/v2/clientes")
+@Slf4j
+@Controller
+public class ClienteControllerV2 {
     @Autowired
-    private TipoClienteService tipoClienteService;
+    private ClienteService clienteService;
+
+    @Autowired
+    private ClienteModelAssembler assemblerClientes;
 
     @GetMapping
-    public ResponseEntity<List<TiposDeClientesDTO>> todosLosMetodosDePago() {
-        List<TiposDeClientesDTO> metodos = tipoClienteService.obtenerTodos();
-        if (metodos.isEmpty()) {
+    public ResponseEntity<List<ClienteDTO>> todosLosClientes() {
+        List<ClienteDTO> clientes = clienteService.obtenerTodos();
+        if (clientes.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(metodos, HttpStatus.OK);
+        return new ResponseEntity<>(clientes, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<TiposDeClientesDTO> buscarPorId(@PathVariable Integer id) {
+    public ResponseEntity<ClienteDTO> buscarPorId(@PathVariable Integer id) {
         try {
-            TiposDeClientesDTO metodo = tipoClienteService.buscarPorId(id);
-            return new ResponseEntity<>(metodo, HttpStatus.OK);
+            ClienteDTO cliente = clienteService.buscarPorId(id);
+            return new ResponseEntity<>(cliente, HttpStatus.OK);
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
         }
     }
 
     @PostMapping
-    public ResponseEntity<TipoCliente> agregarTipoCliente(@RequestBody TipoCliente tipoCliente) {
+    public ResponseEntity<Cliente> agregarCliente(@RequestBody Cliente cliente) {
         try {
-            TipoCliente guardado = tipoClienteService.agregarTipoCliente(tipoCliente);
+            Cliente guardado = clienteService.agregarCliente(cliente);
             return new ResponseEntity<>(guardado, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -54,18 +62,18 @@ public class TipoClienteController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TipoCliente> actualizarTipoCliente(@PathVariable Integer id, @RequestBody TipoCliente tipoCliente) {
+    public ResponseEntity<Cliente> actualizarCliente(@PathVariable Integer id, @RequestBody Cliente cliente) {
         try{
-            TipoCliente newTipoCliente = tipoClienteService.editarTipoCliente(id, tipoCliente);
-            return new ResponseEntity<>(newTipoCliente, HttpStatus.OK);
+            Cliente newCliente = clienteService.editarCliente(id, cliente);
+            return new ResponseEntity<>(newCliente, HttpStatus.OK);
         }catch (RuntimeException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> eliminarTipoCliente(@PathVariable Integer id) {
-        String resultado = tipoClienteService.eliminarTipoCliente(id);
+    public ResponseEntity<String> eliminarCliente(@PathVariable Integer id) {
+        String resultado = clienteService.eliminarCliente(id);
         if (resultado.contains("exitosamente")) {
             return new ResponseEntity<>(resultado, HttpStatus.OK);
         } else {

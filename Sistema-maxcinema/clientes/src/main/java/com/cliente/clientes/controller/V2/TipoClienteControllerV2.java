@@ -1,4 +1,4 @@
-package com.cliente.clientes.controller;
+package com.cliente.clientes.controller.V2;
 
 import java.util.List;
 
@@ -17,15 +17,19 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cliente.clientes.DTO.TiposDeClientesDTO;
 import com.cliente.clientes.model.TipoCliente;
 import com.cliente.clientes.service.TipoClienteService;
+import com.cliente.clientes.assemblers.TipoClienteAssembler;
 
 @RestController
-@RequestMapping("/api/v1/TiposDeClientes")
-public class TipoClienteController {
+@RequestMapping("/api/v2/TiposDeClientes")
+public class TipoClienteControllerV2 {
     @Autowired
     private TipoClienteService tipoClienteService;
 
+    @Autowired
+    private TipoClienteAssembler tipoClienteAssembler;
+
     @GetMapping
-    public ResponseEntity<List<TiposDeClientesDTO>> todosLosMetodosDePago() {
+    public ResponseEntity<List<TiposDeClientesDTO>> TodosLosClientes() {
         List<TiposDeClientesDTO> metodos = tipoClienteService.obtenerTodos();
         if (metodos.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
