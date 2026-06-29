@@ -22,12 +22,12 @@ spring:
             - id: salas-service
               uri: lb://salas
               predicates:
-                - Path=/api/v1/sala/**, /api/v2/sala/**, /api/v1/salas/**, /api/v2/salas/**, /api/v1/tipo-sala/**, /api/v2/tipo-sala/**, /api/v1/tipos-salas/**, /api/v2/tipos-salas/**, /salas/api-docs/**
+                - Path=/api/v1/sala/**, /api/v2/sala/**, /api/v1/salas/**, /api/v2/salas/**, /api/v1/tipo-sala/**, /api/v2/tipo-sala/**, /api/v1/tipos-salas/**, /api/v2/tipos-salas/**, /api/v1/asientos/**, /api/v2/asientos/**, /api/v1/tipo-asiento/**, /api/v2/tipo-asiento/**, /salas/api-docs/**
 
             - id: clientes-service
               uri: lb://clientes
               predicates:
-                - Path=/api/v1/clientes/**, /api/v2/clientes/**, /api/v1/tipo-cliente/**, /api/v2/tipo-cliente/**, /api/v1/metodo-pago/**, /api/v2/metodo-pago/**, /api/v1/asientos/**, /api/v2/asientos/**, /api/v1/tipo-asiento/**, /api/v2/tipo-asiento/**, /api/v1/entradas/**, /api/v2/entradas/**, /clientes/api-docs/**
+                - Path=/api/v1/clientes/**, /api/v2/clientes/**, /api/v1/tipo-cliente/**, /api/v2/tipo-cliente/**, /api/v1/metodo-pago/**, /api/v2/metodo-pago/**, /api/v1/entradas/**, /api/v2/entradas/**, /clientes/api-docs/**
 
 eureka:
   client:
