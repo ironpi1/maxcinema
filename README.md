@@ -1,26 +1,110 @@
-"## Microservicios implementados
+# MaxCinema
 
-Todos los microservicios corren dentro de una misma aplicación Spring Boot en el puerto 8080, compartiendo la base de datos maxcinema_db. Los módulos implementados son: Pelicula (/api/v1/peliculas), Genero (/api/v1/generos), Generos relación (/generos-pelicula), Director (/directores), Directores relación (/directores-pelicula), Idioma (/idiomas), Idiomas relación (/idiomas-pelicula), SalasPelicula (/salas-pelicula), Asiento (/api/v1/asientos), TipoAsiento (/api/v1/tipos-asiento), Cliente (/api/v1/clientes), TipoCliente, Entrada (/api/v1/entradas), MetodoPago (/api/v1/metodos-pago), Region, Comuna, Cine, Sala, TipoSala y TiposSala.
+Sistema de gestión de cines desarrollado con arquitectura de microservicios usando Spring Boot. Permite administrar películas, salas, cines y clientes mediante una API REST centralizada en un API Gateway.
 
-## Funcionalidades implementadas
+## Integrantes
 
-El sistema implementa CRUD completo para todas las entidades del dominio con persistencia real usando JPA + Hibernate (ddl-auto=update). Incluye validaciones con Bean Validation (@Valid, @NotNull, @NotBlank), separación entre DTOs y entidades en todas las capas, manejo centralizado de excepciones con @ControllerAdvice (GlobalExceptionHandler), respuestas HTTP estructuradas con ResponseEntity y códigos de estado correctos, logs estructurados con SLF4J (@Slf4j) en controllers y services, relaciones entre entidades (@OneToMany, @ManyToOne, @ManyToMany), y arquitectura CSR: Controller → Service → Repository.
+- Antonella Aliaga — microservicios peliculas y salas
+- Ignacio Fuentes — microservicio clientes
+- Rodrigo Pérez — microservicio cines
 
-## Estructura del proyecto
+## Microservicios implementados
 
-El código fuente se organiza bajo src/main/java/com/maxcinema/maxcinema/ con los paquetes controller (endpoints REST), service (lógica de negocio), repository (acceso a datos con JpaRepository), model (entidades JPA), DTO (objetos de transferencia) y exception (manejo global de errores).
+- **eureka** (puerto 8761) — servidor de descubrimiento
+- **gateway** (puerto 8080) — enrutamiento centralizado
+- **peliculas** (puerto dinámico) — gestión de películas, géneros, directores, idiomas y salas asociadas a película
+- **salas** (puerto dinámico) — gestión de salas, tipos de sala, asientos y tipos de asiento
+- **cines** (puerto dinámico) — gestión de cines, regiones y comunas
+- **clientes** (puerto dinámico) — gestión de clientes, tipos de cliente, entradas y métodos de pago
+
+## Rutas principales del Gateway
+
+Todas las peticiones pasan por `http://localhost:8080`.
+
+Microservicio peliculas:
+- /api/v1/peliculas
+- /api/v1/generos
+- /api/v1/generos-pelicula
+- /api/v1/directores
+- /api/v1/directores-pelicula
+- /api/v1/idiomas
+- /api/v1/idiomas-pelicula
+- /api/v1/salas-pelicula
+
+Microservicio salas:
+- /api/v1/salas
+- /api/v1/tipo-sala
+- /api/v1/tipos-salas
+- /api/v1/asientos
+- /api/v1/tipo-asiento
+
+Microservicio cines:
+- /api/v1/cines
+- /api/v1/cine
+- /api/v1/region
+- /api/v1/comuna
+
+Microservicio clientes:
+- /api/v1/clientes
+- /api/v1/tipo-cliente
+- /api/v1/entradas
+- /api/v1/metodo-pago
+
+## Documentación Swagger
+
+La UI de Swagger está disponible de forma centralizada en el gateway:
+
+- Swagger UI unificado: http://localhost:8080/swagger-ui/index.html
+- OpenAPI peliculas: http://localhost:8080/peliculas/api-docs
+- OpenAPI cines: http://localhost:8080/cines/api-docs
+- OpenAPI salas: http://localhost:8080/salas/api-docs
+- OpenAPI clientes: http://localhost:8080/clientes/api-docs
 
 ## Requisitos previos
 
 - Java 21
 - Maven
-- Laragon con MySQL activo
-- VS Code
-- Spring Boot
-- Spring Jpa + Hibernate
+- MySQL 8 activo (Laragon, XAMPP o instalación directa)
 
-## Pasos para ejecutar
+Las bases de datos se crean automáticamente al iniciar cada microservicio.
 
-Primero crea la base de datos ejecutando CREATE DATABASE maxcinema_db; en tu cliente MySQL. Luego verifica que src/main/resources/application.properties tenga la URL jdbc:mysql://localhost:3306/maxcinema_db, usuario root y contraseña vacía. Las tablas se crean automáticamente al iniciar gracias a ddl-auto=update.
+## Cómo ejecutar localmente
 
-Para ejecutar, corre ./mvnw spring-boot:run desde la raíz del proyecto (en Windows: mvnw.cmd spring-boot:run). Para verificar que funciona, prueba GET http://localhost:8080/api/v1/peliculas en Postman o el navegador." 
+**Opción 1 — script automático (solo Windows)**
+
+Desde la raíz del proyecto ejecutar:
+
+```
+iniciar-todo.bat
+```
+
+Levanta todos los servicios en el orden correcto y espera a que Eureka esté listo antes de iniciar los demás.
+
+**Opción 2 — manual**
+
+Abrir una terminal por cada microservicio y ejecutar `mvnw.cmd spring-boot:run` (Windows) o `./mvnw spring-boot:run` (Linux/Mac), en este orden:
+
+1. Sistema-maxcinema/eureka
+2. Sistema-maxcinema/gateway
+3. Sistema-maxcinema/peliculas
+4. Sistema-maxcinema/cines
+5. Sistema-maxcinema/salas
+6. Sistema-maxcinema/clientes
+
+Para verificar que todo está funcionando, el dashboard de Eureka queda en http://localhost:8761 y deben aparecer los 4 microservicios registrados.
+
+## Perfiles de entorno
+
+Cada microservicio tiene configurados tres perfiles: dev, test y prod. Por defecto corre en dev. Para cambiar de perfil:
+
+```
+./mvnw spring-boot:run -Dspring-boot.run.profiles=prod
+```
+
+## Pruebas unitarias
+
+Cada microservicio tiene sus pruebas en `src/test/java`. Para ejecutarlas:
+
+```
+./mvnw test
+```
