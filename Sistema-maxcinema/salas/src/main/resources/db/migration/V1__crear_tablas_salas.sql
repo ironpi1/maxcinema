@@ -1,7 +1,7 @@
 CREATE TABLE sala (
-    id            INT AUTO_INCREMENT PRIMARY KEY,
-    nombre        VARCHAR(50) NOT NULL,
-    numeroDeSala  INT         NOT NULL DEFAULT 1
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL,
+    numero_de_sala INT NOT NULL DEFAULT 1
 );
  
 CREATE TABLE tipo_sala (
@@ -32,15 +32,13 @@ CREATE TABLE asientos (
     CONSTRAINT fk_asiento_tipo FOREIGN KEY (tipo_asiento_id) REFERENCES tipo_asiento(id)
 );
 
--- Insertar Salas
 INSERT INTO 
-    sala (nombre, numeroDeSala) 
+    sala (nombre, numero_de_sala) 
 VALUES 
     ('Sala Palco Premier', 1),
     ('Sala 4DX', 2),
     ('Sala 2D', 3);
 
--- Insertar Tipos de Sala
 INSERT INTO 
     tipo_sala (nombre) 
 VALUES 
@@ -48,7 +46,6 @@ VALUES
     ('4DX'),
     ('2D Tradicional');
 
--- Relacionar Salas con Tipos de Sala (Tabla intermedia)
 INSERT INTO 
     tipos_sala (nombre, sala_id, TipoSala_id) 
 VALUES 
@@ -56,7 +53,6 @@ VALUES
     ('Asig 4DX', 2, 2),
     ('Asig 2D', 3, 3);
 
--- Insertar Tipos de Asiento
 INSERT INTO 
     tipo_asiento (tipo) 
 VALUES 
@@ -64,7 +60,6 @@ VALUES
 ('Reclinable'),
 ('D-Box con Movimiento');
 
--- Insertar Asientos (estado en BOOLEAN: true = disponible, false = ocupado/bloqueado)
 INSERT INTO 
     asientos (fila, columna, estado, tipo_asiento_id) 
 VALUES 
