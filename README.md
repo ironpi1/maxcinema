@@ -1,6 +1,6 @@
 # MaxCinema
 
-Sistema de gestión de cines desarrollado con arquitectura de microservicios usando Spring Boot. Permite administrar películas, salas, cines y clientes mediante una API REST centralizada en un API Gateway.
+Sistema de gestión de cines desarrollado con arquitectura de microservicios usando Spring Boot.
 
 ## Integrantes
 
