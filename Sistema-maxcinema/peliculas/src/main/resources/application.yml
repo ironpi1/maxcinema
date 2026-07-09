@@ -8,7 +8,7 @@ springdoc:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: ${EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE:http://localhost:8761/eureka/}
 
 spring:
   application:
@@ -29,7 +29,7 @@ spring:
   datasource:
     username: root
     password: ''
-    url: jdbc:mysql://localhost:3306/db_peliculas_dev?createDatabaseIfNotExist=true
+    url: jdbc:mysql://${DATABASE_HOST:localhost}:3306/db_peliculas_dev?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false
     driverClassName: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:

@@ -10,6 +10,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.NoArgsConstructor;
@@ -36,6 +39,7 @@ public class Comuna {
     @JoinColumn(name = "region_id")
     private Region region;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "comuna")
     private List<Cine> cines;
 }

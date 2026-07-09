@@ -12,6 +12,8 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Builder
 @Data
 @NoArgsConstructor
@@ -35,6 +37,7 @@ public class Sala {
     @Column(name = "numero_de_sala", nullable = false)
     private Integer numeroDeSala = 1;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "sala")
     private List<TiposSalas> tiposSalas;
 }

@@ -1,6 +1,9 @@
 package com.pelicula.peliculas.model;
 
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -31,6 +34,7 @@ public class Director {
     @NotBlank(message = "La nacionalidad no puede estar vacía")
     private String nacionalidad;
     
+    @JsonIgnore
     @OneToMany(mappedBy = "director")
     private List<Directores> directores;
 

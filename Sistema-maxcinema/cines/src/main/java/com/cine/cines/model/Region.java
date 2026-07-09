@@ -7,6 +7,9 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.NoArgsConstructor;
@@ -29,6 +32,7 @@ public class Region {
     @Column(nullable = false, length = 25)
     private String nombre;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "region")
     private List<Comuna> comunas;
 }

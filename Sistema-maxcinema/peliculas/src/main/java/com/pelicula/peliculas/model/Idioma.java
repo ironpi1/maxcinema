@@ -2,6 +2,8 @@ package com.pelicula.peliculas.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,6 +31,7 @@ public class Idioma {
     @Size(min = 10, max = 20, message = "El nombre del idioma debe tener entre 10 y 20 caracteres")
     private String nombre;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "idioma")
     private List<Idiomas> peliculas;
 }

@@ -2,6 +2,8 @@ package com.pelicula.peliculas.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -44,15 +46,19 @@ public class Pelicula {
 
     private String estado;
     
+    @JsonIgnore
     @OneToMany(mappedBy = "pelicula")
     private List<Generos> generos;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "pelicula")
     private List<Directores> directores;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "pelicula")
     private List<Idiomas> idiomas;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "pelicula")
     private List<SalasPelicula> salasPelicula;
 }

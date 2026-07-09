@@ -2,6 +2,8 @@ package com.cliente.clientes.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -32,6 +34,7 @@ public class TipoCliente {
     @Size(max = 10, message = "El descuento no puede tener más de 10 caracteres")
     private Float descuento;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "tipoCliente")
     private List<Cliente> clientes;
 }

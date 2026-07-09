@@ -2,6 +2,8 @@ package com.sala.salas.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,6 +31,7 @@ public class TipoAsiento {
     @Column(nullable = false, length = 50)
     private String tipo;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "tipoAsiento")
     private List<Asiento> asientos;
     

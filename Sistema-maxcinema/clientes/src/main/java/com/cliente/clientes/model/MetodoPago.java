@@ -2,6 +2,8 @@ package com.cliente.clientes.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,6 +31,7 @@ public class MetodoPago {
     @Column(nullable = false, length = 50)
     private String tipoPago;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "metodoPago")
     private List<Entrada> entradas;
 
