@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -18,8 +19,11 @@ import com.cliente.clientes.DTO.TiposDeClientesDTO;
 import com.cliente.clientes.model.TipoCliente;
 import com.cliente.clientes.service.TipoClienteService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
 @RequestMapping("/api/v1/TiposDeClientes")
+@Slf4j
 public class TipoClienteController {
     @Autowired
     private TipoClienteService tipoClienteService;
@@ -35,6 +39,7 @@ public class TipoClienteController {
 
     @GetMapping("/{id}")
     public ResponseEntity<TiposDeClientesDTO> buscarPorId(@PathVariable Integer id) {
+        log.debug("PUT /TiposDeClientes/{}",id);
         try {
             TiposDeClientesDTO metodo = tipoClienteService.buscarPorId(id);
             return new ResponseEntity<>(metodo, HttpStatus.OK);
@@ -68,6 +73,16 @@ public class TipoClienteController {
         try {
             tipoClienteService.eliminarTipoCliente(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PatchMapping("/id")
+    public ResponseEntity<TiposDeClientesDTO> actualizarTipoClientParcial(@PathVariable Integer id, @RequestBody TipoCliente tipoCliente){
+        try {
+            TiposDeClientesDTO newTiposDeClientes = tipoClienteService.editarTipoCliente(id, tipoCliente);
+            return new ResponseEntity<>(newTiposDeClientes, HttpStatus.OK);
         } catch (RuntimeException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

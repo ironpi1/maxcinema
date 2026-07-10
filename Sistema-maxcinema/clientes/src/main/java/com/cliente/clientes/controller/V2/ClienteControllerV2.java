@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -98,6 +99,15 @@ public class ClienteControllerV2 {
             return ResponseEntity.noContent().build();
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
+        }
+    }
+    @PatchMapping("/{id}")
+    public ResponseEntity<ClienteDTO> actualizarClienteParcial(@PathVariable Integer id, @RequestBody Cliente cliente){
+        try {
+            ClienteDTO newCliente = clienteService.editarCliente(id, cliente);
+            return new ResponseEntity<>(newCliente,HttpStatus.OK);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 }
