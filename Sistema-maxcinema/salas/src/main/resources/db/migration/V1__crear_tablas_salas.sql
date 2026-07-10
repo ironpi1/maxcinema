@@ -14,7 +14,7 @@ CREATE TABLE tipos_sala (
     nombre       VARCHAR(50) NOT NULL,
     sala_id      INT,
     TipoSala_id  INT,
-    CONSTRAINT fk_tipossalas_sala     FOREIGN KEY (sala_id)     REFERENCES Sala(id),
+    CONSTRAINT fk_tipossalas_sala     FOREIGN KEY (sala_id)     REFERENCES sala(id),
     CONSTRAINT fk_tipossalas_tiposala FOREIGN KEY (TipoSala_id) REFERENCES tipo_sala(id)
 );
 

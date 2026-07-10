@@ -19,7 +19,7 @@ services:
       retries: 20
 
   eureka-server:
-    build: ./eureka
+    build: ./sistema-maxcinema/eureka
     container_name: eureka-server
     ports:
       - "8761:8761"
@@ -33,7 +33,7 @@ services:
       start_period: 30s
 
   api-gateway:
-    build: ./gateway
+    build: ./sistema-maxcinema/gateway
     container_name: api-gateway
     ports:
       - "8080:8080"
@@ -47,7 +47,7 @@ services:
         condition: service_healthy
 
   peliculas-service:
-    build: ./peliculas
+    build: ./sistema-maxcinema/peliculas
     container_name: peliculas-service
     environment:
       SPRING_PROFILES_ACTIVE: dev
@@ -62,7 +62,7 @@ services:
         condition: service_healthy
 
   cines-service:
-    build: ./cines
+    build: ./sistema-maxcinema/cines
     container_name: cines-service
     environment:
       SPRING_PROFILES_ACTIVE: dev
@@ -77,7 +77,7 @@ services:
         condition: service_healthy
 
   salas-service:
-    build: ./salas
+    build: ./sistema-maxcinema/salas
     container_name: salas-service
     environment:
       SPRING_PROFILES_ACTIVE: dev
@@ -92,7 +92,7 @@ services:
         condition: service_healthy
 
   clientes-service:
-    build: ./clientes
+    build: ./sistema-maxcinema/clientes
     container_name: clientes-service
     environment:
       SPRING_PROFILES_ACTIVE: dev
